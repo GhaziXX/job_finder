@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "590527334105",
+    "firebase_url": "https://jobby-88c12.firebaseio.com",
+    "project_id": "jobby-88c12",
+    "storage_bucket": "jobby-88c12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590527334105:android:c6a43f6188ab0dfbbba0c8",
+        "android_client_info": {
+          "package_name": "com.GTDevelopment.jobby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590527334105-7qv7ki4a3s76j7jqrdfq4sfpvffpe66t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.GTDevelopment.jobby",
+            "certificate_hash": "cc6d712af3b63f35c2c463a9537213d6198efa46"
+          }
+        },
+        {
+          "client_id": "590527334105-90elm5pr82a052l0orj76cn7cmndge5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM1PHgVpSrqoj1BgqeLj7b_9j5a-E9gac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590527334105-90elm5pr82a052l0orj76cn7cmndge5t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
