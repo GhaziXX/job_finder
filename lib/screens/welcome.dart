@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder/screens/Offers.dart';
+import 'package:job_finder/screens/Main/Offers.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 import 'auth/auth.dart';

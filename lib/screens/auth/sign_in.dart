@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder/config/Palette.dart';
-import 'package:job_finder/screens/auth/decoration_functions.dart';
-import 'package:job_finder/screens/auth/provider_button.dart';
-import 'package:job_finder/screens/auth/sign_in_up_bar.dart';
-
-import 'package:job_finder/screens/auth/title.dart';
+import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
+import 'package:job_finder/screens/auth/utils/provider_button.dart';
+import 'package:job_finder/screens/auth/utils/sign_in_up_bar.dart';
+import 'package:job_finder/screens/auth/utils/title.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 class SignIn extends StatelessWidget {
@@ -79,10 +77,6 @@ class SignIn extends StatelessWidget {
                         ProviderButton(
                           context: context,
                           signInType: "google",
-                        ),
-                        ProviderButton(
-                          context: context,
-                          signInType: "apple",
                         ),
                         ProviderButton(
                           context: context,

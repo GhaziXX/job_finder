@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:job_finder/config/Palette.dart';
+import 'package:job_finder/screens/Main/Offers.dart';
 import 'package:job_finder/screens/auth/auth.dart';
-import 'package:job_finder/screens/offers.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -30,11 +30,9 @@ class MyApp extends StatelessWidget {
           // navigating to a new route, has access to the Lit auth methods
           return LitAuthInit(
             authProviders: const AuthProviders(
-              emailAndPassword: true, // enabled by default
-              google: true,
-              apple: true,
-              twitter: true,
-            ),
+                emailAndPassword: true, // enabled by default
+                google: true,
+                twitter: true),
             child: MaterialApp(
               title: 'Jobby',
               theme: ThemeData(
@@ -53,7 +51,7 @@ class MyApp extends StatelessWidget {
             ),
           );
         }
-        // Otherwise, show something whilst waiting for initialization to complete
+        // Otherwise, show something while waiting for initialization to complete
         return Center(child: CircularProgressIndicator());
       },
     );

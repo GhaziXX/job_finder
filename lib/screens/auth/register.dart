@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
-
-import 'decoration_functions.dart';
-import 'sign_in_up_bar.dart';
-import 'title.dart';
+import 'package:job_finder/screens/auth/utils/sign_in_up_bar.dart';
+import 'package:job_finder/screens/auth/utils/title.dart';
 
 class Register extends StatelessWidget {
   const Register({Key key, this.onSignInPressed}) : super(key: key);
@@ -33,7 +32,7 @@ class Register extends StatelessWidget {
               child: ListView(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 9),
                     child: TextFormField(
                         style: const TextStyle(
                           fontSize: 18,
@@ -43,7 +42,7 @@ class Register extends StatelessWidget {
                             registerInputDecoration(hintText: 'Full Name')),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 9),
                     child: EmailTextFormField(
                         style: const TextStyle(
                           fontSize: 18,
@@ -52,7 +51,7 @@ class Register extends StatelessWidget {
                         decoration: registerInputDecoration(hintText: 'Email')),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 9),
                     child: PasswordTextFormField(
                       style: const TextStyle(
                         fontSize: 18,
