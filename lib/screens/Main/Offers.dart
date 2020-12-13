@@ -1,7 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:job_finder/screens/Main/bookmarked.dart';
-import 'package:job_finder/screens/Main/settings.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 import '../auth/auth.dart';

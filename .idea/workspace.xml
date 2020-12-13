@@ -6,7 +6,14 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f59acc18-e86e-4216-94fa-7c2c39194fc3" name="Default Changelist" comment="" />
+    <list default="true" id="f59acc18-e86e-4216-94fa-7c2c39194fc3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/Main/Offers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/Offers.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +30,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../home_page" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -41,13 +49,29 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1605734091035">
+    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1607869804830">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1605734091035" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1605734094411">
+    <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1607869804830" />
+    <state width="610" height="160" key="GridCell.Tab.0.bottom" timestamp="1607464490596">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1605734094411" />
+    <state width="610" height="160" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1607464490596" />
+    <state width="610" height="160" key="GridCell.Tab.0.center" timestamp="1607464490596">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="610" height="160" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1607464490596" />
+    <state width="610" height="160" key="GridCell.Tab.0.left" timestamp="1607464490595">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="610" height="160" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1607464490595" />
+    <state width="610" height="160" key="GridCell.Tab.0.right" timestamp="1607464490596">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="610" height="160" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1607464490596" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1607454951535">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1607454951535" />
   </component>
 </project>
