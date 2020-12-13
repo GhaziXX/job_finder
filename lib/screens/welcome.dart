@@ -41,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
 
   void _navigateToHomeScreen(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => Navigator.of(context).pushReplacement(OfferScreen.route),
+      (_) => Navigator.of(context).pushReplacement(MyHomePage.route),
     );
   }
 }

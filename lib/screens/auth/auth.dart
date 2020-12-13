@@ -58,7 +58,7 @@ class _AuthScreenState extends State<AuthScreen>
           ),
         ),
         onAuthSuccess: () {
-          Navigator.of(context).pushReplacement(OfferScreen.route);
+          Navigator.of(context).pushReplacement(MyHomePage.route);
         },
         child: Stack(
           children: [
