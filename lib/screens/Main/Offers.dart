@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/screens/Main/bookmarked.dart';
 import 'package:job_finder/screens/Main/settings.dart';
+import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key}) : super(key: key);
