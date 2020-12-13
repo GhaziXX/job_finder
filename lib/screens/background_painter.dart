@@ -7,150 +7,156 @@ import 'package:job_finder/config/Palette.dart';
 
 class BackgroundPainter extends CustomPainter {
   BackgroundPainter({Animation<double> animation})
-      : topPaint = Paint()
-          ..color = Palette.starCommandBlue
-          ..style = PaintingStyle.fill,
-        middlePaint = Paint()
-          ..color = Palette.darkCornflowerBlue
-          ..style = PaintingStyle.fill,
-        bottumPaint = Paint()
+      : firstPaint = Paint()
           ..color = Palette.navyBlue
           ..style = PaintingStyle.fill,
-        liquidAnim = CurvedAnimation(
-          curve: Curves.elasticOut,
-          reverseCurve: Curves.easeInBack,
-          parent: animation,
-        ),
-        bottumAnim = CurvedAnimation(
-          parent: animation,
-          curve: const Interval(
-            0,
-            0.7,
-            curve: Interval(0, 0.8, curve: SpringCurve()),
-          ),
-          reverseCurve: Curves.linear,
-        ),
-        middleAnim = CurvedAnimation(
-          parent: animation,
-          curve: const Interval(
-            0,
-            0.8,
-            curve: Interval(0, 0.9, curve: SpringCurve()),
-          ),
-          reverseCurve: Curves.easeInCirc,
-        ),
-        topAnim = CurvedAnimation(
-          parent: animation,
-          curve: const SpringCurve(),
-          reverseCurve: Curves.easeInCirc,
-        ),
-        super(repaint: animation);
+        secPaint = Paint()
+          ..color = Palette.darkCornflowerBlue
+          ..style = PaintingStyle.fill,
+        thirdPaint = Paint()
+          ..color = Palette.starCommandBlue
+          ..style = PaintingStyle.fill,
+        forthPaint = Paint()
+          ..color = Palette.blueGreen
+          ..style = PaintingStyle.fill,
+        fifthPaint = Paint()
+          ..color = Palette.ceayola
+          ..style = PaintingStyle.fill;
 
-  final Animation<double> liquidAnim;
-  final Animation<double> topAnim;
-  final Animation<double> middleAnim;
-  final Animation<double> bottumAnim;
-
-  final Paint topPaint;
-  final Paint middlePaint;
-  final Paint bottumPaint;
-
+  final Paint firstPaint;
+  final Paint secPaint;
+  final Paint thirdPaint;
+  final Paint forthPaint;
+  final Paint fifthPaint;
   @override
   void paint(Canvas canvas, Size size) {
     print('painting');
-    paintTop(canvas, size);
-    paintMiddle(canvas, size);
-    paintBottum(canvas, size);
+    paintFirst(canvas, size);
+    paintSec(canvas, size);
+    paintThird(canvas, size);
+    paintForth(canvas, size);
+    paintFifth(canvas, size);
   }
 
-  void paintTop(Canvas canvas, Size size) {
+  void paintFirst(Canvas canvas, Size size) {
+    final double x = size.width / 8;
+    final double d = size.height / 3;
+    final double y = size.height / 16;
     final path = Path();
     path.moveTo(size.width, size.height / 2);
     path.lineTo(size.width, 0);
     path.lineTo(0, 0);
-    path.lineTo(0, lerpDouble(0, size.height, topAnim.value));
     _addPointsToPath(path, [
-      Point(lerpDouble(0, size.width / 3, topAnim.value),
-          lerpDouble(0, size.height, topAnim.value)),
-      Point(lerpDouble(size.width / 2, size.width / 4 * 3, liquidAnim.value),
-          lerpDouble(size.height / 2, size.height / 4 * 3, liquidAnim.value)),
-      Point(size.width,
-          lerpDouble(size.height / 2, size.height * 3 / 4, liquidAnim.value))
+      Point(0, d),
+      Point(0, d),
+      Point(x, d + y),
+      Point(2 * x, d - y),
+      Point(3 * x, d + y),
+      Point(4 * x, d - y),
+      Point(5 * x, d + y),
+      Point(6 * x, d - y),
+      Point(7 * x, d + y),
+      Point(8 * x, d - y),
+      Point(size.width, d),
     ]);
 
-    canvas.drawPath(path, topPaint);
+    canvas.drawPath(path, firstPaint);
   }
 
-  void paintMiddle(Canvas canvas, Size size) {
+  void paintSec(Canvas canvas, Size size) {
+    final double x = size.width / 8;
+    final double d = size.height / 3.5;
+    final double y = size.height / 16;
     final path = Path();
-    path.moveTo(size.width, 300);
+    path.moveTo(size.width, d);
     path.lineTo(size.width, 0);
     path.lineTo(0, 0);
-    path.lineTo(
-      0,
-      lerpDouble(
-        size.height / 4,
-        size.height / 2,
-        middleAnim.value,
-      ),
-    );
-    _addPointsToPath(
-      path,
-      [
-        Point(
-          size.width / 4,
-          lerpDouble(size.height / 2, size.height * 3 / 4, liquidAnim.value),
-        ),
-        Point(
-          size.width * 3 / 5,
-          lerpDouble(size.height / 4, size.height / 2, liquidAnim.value),
-        ),
-        Point(
-          size.width * 4 / 5,
-          lerpDouble(size.height / 6, size.height / 3, middleAnim.value),
-        ),
-        Point(
-          size.width,
-          lerpDouble(size.height / 5, size.height / 4, middleAnim.value),
-        ),
-      ],
-    );
-
-    canvas.drawPath(path, middlePaint);
+    _addPointsToPath(path, [
+      Point(0, d),
+      Point(0, d),
+      Point(x, d + y),
+      Point(2 * x, d - y),
+      Point(3 * x, d + y),
+      Point(4 * x, d - y),
+      Point(5 * x, d + y),
+      Point(6 * x, d - y),
+      Point(7 * x, d + y),
+      Point(8 * x, d - y),
+      Point(size.width, d),
+    ]);
+    canvas.drawPath(path, secPaint);
   }
 
-  void paintBottum(Canvas canvas, Size size) {
-    if (bottumAnim.value > 0) {
-      final path = Path();
+  void paintThird(Canvas canvas, Size size) {
+    final double x = size.width / 8;
+    final double d = size.height / 4.5;
+    final double y = size.height / 16;
+    final path = Path();
+    path.moveTo(size.width, d);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+    _addPointsToPath(path, [
+      Point(0, d),
+      Point(0, d),
+      Point(x, d + y),
+      Point(2 * x, d - y),
+      Point(3 * x, d + y),
+      Point(4 * x, d - y),
+      Point(5 * x, d + y),
+      Point(6 * x, d - y),
+      Point(7 * x, d + y),
+      Point(8 * x, d - y),
+      Point(size.width, d),
+    ]);
+    canvas.drawPath(path, thirdPaint);
+  }
 
-      path.moveTo(size.width * 3 / 4, 0);
-      path.lineTo(0, 0);
-      path.lineTo(
-        0,
-        lerpDouble(0, size.height / 12, bottumAnim.value),
-      );
+  void paintForth(Canvas canvas, Size size) {
+    final double x = size.width / 8;
+    final double d = size.height / 6;
+    final double y = size.height / 16;
+    final path = Path();
+    path.moveTo(size.width, d);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+    _addPointsToPath(path, [
+      Point(0, d),
+      Point(0, d),
+      Point(x, d + y),
+      Point(2 * x, d - y),
+      Point(3 * x, d + y),
+      Point(4 * x, d - y),
+      Point(5 * x, d + y),
+      Point(6 * x, d - y),
+      Point(7 * x, d + y),
+      Point(8 * x, d - y),
+      Point(size.width, d),
+    ]);
+    canvas.drawPath(path, forthPaint);
+  }
 
-      _addPointsToPath(path, [
-        Point(
-          size.width / 7,
-          lerpDouble(0, size.height / 6, liquidAnim.value),
-        ),
-        Point(
-          size.width / 3,
-          lerpDouble(0, size.height / 10, liquidAnim.value),
-        ),
-        Point(
-          size.width / 3 * 2,
-          lerpDouble(0, size.height / 8, liquidAnim.value),
-        ),
-        Point(
-          size.width * 3 / 4,
-          0,
-        ),
-      ]);
-
-      canvas.drawPath(path, bottumPaint);
-    }
+  void paintFifth(Canvas canvas, Size size) {
+    final double x = size.width / 8;
+    final double d = size.height / 8;
+    final double y = size.height / 16;
+    final path = Path();
+    path.moveTo(size.width, d);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+    _addPointsToPath(path, [
+      Point(0, d),
+      Point(0, d),
+      Point(x, d + y),
+      Point(2 * x, d - y),
+      Point(3 * x, d + y),
+      Point(4 * x, d - y),
+      Point(5 * x, d + y),
+      Point(6 * x, d - y),
+      Point(7 * x, d + y),
+      Point(8 * x, d - y),
+      Point(size.width, d),
+    ]);
+    canvas.drawPath(path, fifthPaint);
   }
 
   @override

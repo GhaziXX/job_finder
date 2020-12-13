@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
                 twitter: true),
             child: MaterialApp(
               title: 'Jobby',
+              debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 visualDensity: VisualDensity.adaptivePlatformDensity,
                 textTheme: GoogleFonts.muliTextTheme(),
