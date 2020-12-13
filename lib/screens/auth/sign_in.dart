@@ -18,7 +18,7 @@ class SignIn extends StatelessWidget {
     final isSubmitting = context.isSubmitting();
     return SignInForm(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(30.0),
         child: Column(
           children: [
             const Expanded(
@@ -31,7 +31,7 @@ class SignIn extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 4,
+              flex: 5,
               child: ListView(
                 children: [
                   Padding(
@@ -57,7 +57,7 @@ class SignIn extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Column(
@@ -84,7 +84,7 @@ class SignIn extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Spacer(),
+                    Spacer(),
                     InkWell(
                         splashColor: Colors.white,
                         onTap: () {

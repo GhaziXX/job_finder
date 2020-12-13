@@ -65,7 +65,6 @@ class _AuthScreenState extends State<AuthScreen>
             SizedBox.expand(
               child: CustomPaint(
                 painter: BackgroundPainter(
-                  animation: _controller.view,
                 ),
               ),
             ),
@@ -94,7 +93,6 @@ class _AuthScreenState extends State<AuthScreen>
                                 onRegisterClicked: () {
                                   context.resetSignInForm();
                                   showSignInPage.value = false;
-                                  _controller.forward();
                                 },
                               )
                             : Register(
@@ -102,7 +100,6 @@ class _AuthScreenState extends State<AuthScreen>
                                 onSignInPressed: () {
                                   context.resetSignInForm();
                                   showSignInPage.value = true;
-                                  _controller.reverse();
                                 },
                               ),
                       );

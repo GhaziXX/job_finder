@@ -25,7 +25,7 @@ class SignUpBar extends StatelessWidget {
             label,
             style: const TextStyle(
               fontWeight: FontWeight.w800,
-              color: Colors.white,
+              color: Palette.navyBlue,
               fontSize: 24,
             ),
           ),

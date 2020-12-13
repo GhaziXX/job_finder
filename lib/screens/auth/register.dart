@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:job_finder/screens/auth/utils/sign_in_up_bar.dart';
@@ -14,7 +15,7 @@ class Register extends StatelessWidget {
     final isSubmitting = context.isSubmitting();
     return SignInForm(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -28,7 +29,7 @@ class Register extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 4,
+              flex: 5,
               child: ListView(
                 children: [
                   Padding(
@@ -77,7 +78,7 @@ class Register extends StatelessWidget {
                       child: const Text(
                         'Sign in',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Palette.navyBlue,
                           fontSize: 16,
                           decoration: TextDecoration.underline,
                         ),

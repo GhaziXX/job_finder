@@ -4,21 +4,21 @@ import 'package:job_finder/config/Palette.dart';
 InputDecoration registerInputDecoration({String hintText}) {
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(vertical: 18.0),
-    hintStyle: const TextStyle(color: Colors.white, fontSize: 18),
+    hintStyle: const TextStyle(color: Palette.darkCornflowerBlue, fontSize: 18),
     hintText: hintText,
     focusedBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.white, width: 2),
+      borderSide: BorderSide(color: Palette.navyBlue, width: 2),
     ),
     enabledBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.white),
+      borderSide: BorderSide(color: Palette.darkCornflowerBlue),
     ),
     errorBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(color: Palette.starCommandBlue),
+      borderSide: BorderSide(color: Palette.burnt),
     ),
     focusedErrorBorder: const UnderlineInputBorder(
       borderSide: BorderSide(width: 2.0, color: Palette.burnt),
     ),
-    errorStyle: const TextStyle(color: Colors.white),
+    errorStyle: const TextStyle(color: Palette.burnt),
   );
 }
 
