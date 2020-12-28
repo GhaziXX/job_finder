@@ -10,4 +10,5 @@ class Palette {
   static const Color blizzardBlue = Color(0xffADE8F4);
   static const Color powderBlue = Color(0xffACAF0F8);
   static const Color burnt = Color(0xffE76F51);
+  static const Color gray = Color(0xFF3A3A3A);
 }

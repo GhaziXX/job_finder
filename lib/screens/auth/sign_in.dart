@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
 import 'package:job_finder/screens/auth/utils/provider_button.dart';

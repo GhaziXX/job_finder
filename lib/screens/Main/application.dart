@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder/config/Palette.dart';
 
-class BookmarkedPage extends StatefulWidget {
-  const BookmarkedPage({Key key}) : super(key: key);
+class ApplicationPage extends StatefulWidget {
+  const ApplicationPage({Key key}) : super(key: key);
   static MaterialPageRoute get route => MaterialPageRoute(
-        builder: (context) => const BookmarkedPage(),
+        builder: (context) => const ApplicationPage(),
       );
 
   @override
-  _BookmarkedPageState createState() => _BookmarkedPageState();
+  _ApplicationPageState createState() => _ApplicationPageState();
 }
 
-class _BookmarkedPageState extends State<BookmarkedPage> {
+class _ApplicationPageState extends State<ApplicationPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Palette.powderBlue,
       body: new Center(
-        child: new Text("Bookmark Page"),
+        child: new Text("Applications Page"),
       ),
     );
   }

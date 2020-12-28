@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder/screens/Main/Offers.dart';
+import 'package:job_finder/screens/Main/bottom_nav.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 import 'auth/auth.dart';
@@ -21,9 +21,7 @@ class WelcomeScreen extends StatelessWidget {
       empty: (_) {
         _navigateToAuthScreen(context);
       },
-      initializing: (_) {
-        print("initializing");
-      },
+      initializing: (_) {},
     );
 
     return const Scaffold(
@@ -41,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
 
   void _navigateToHomeScreen(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => Navigator.of(context).pushReplacement(MyHomePage.route),
+      (_) => Navigator.of(context).pushReplacement(BottomNav.route),
     );
   }
 }

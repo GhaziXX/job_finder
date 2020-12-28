@@ -30,7 +30,6 @@ class BackgroundPainter extends CustomPainter {
   final Paint fifthPaint;
   @override
   void paint(Canvas canvas, Size size) {
-    print('painting');
     paintFirst(canvas, size);
     paintSec(canvas, size);
     paintThird(canvas, size);

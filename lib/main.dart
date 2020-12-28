@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/config/SizeConfig.dart';
-import 'package:job_finder/screens/Main/Off.dart';
+
+import 'package:job_finder/screens/Main/bottom_nav.dart';
 import 'package:job_finder/screens/auth/auth.dart';
-import 'package:job_finder/screens/Main/Offers.dart';
+
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -52,10 +53,10 @@ class MyApp extends StatelessWidget {
                           color: Palette.blueGreen,
                         ),
                       ),
-                      home: Off()//LitAuthState(
-                        //authenticated: MyHomePage(),
-                        //unauthenticated: AuthScreen(),
-                      //),
+                      home: LitAuthState(
+                        authenticated: BottomNav(),
+                        unauthenticated: AuthScreen(),
+                      ),
                     ),
                   );
                 }

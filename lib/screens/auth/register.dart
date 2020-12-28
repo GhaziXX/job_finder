@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
@@ -13,6 +14,9 @@ class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSubmitting = context.isSubmitting();
+    TextEditingController fullname = TextEditingController();
+    final databaseReference =
+        FirebaseFirestore.instance.collection("users_data");
     return SignInForm(
       child: Padding(
         padding: const EdgeInsets.all(30.0),
@@ -35,9 +39,10 @@ class Register extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 9),
                     child: TextFormField(
+                        controller: fullname,
                         style: const TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: Colors.black54,
                         ),
                         decoration:
                             registerInputDecoration(hintText: 'Full Name')),
@@ -47,7 +52,7 @@ class Register extends StatelessWidget {
                     child: EmailTextFormField(
                         style: const TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: Colors.black54,
                         ),
                         decoration: registerInputDecoration(hintText: 'Email')),
                   ),
@@ -56,7 +61,7 @@ class Register extends StatelessWidget {
                     child: PasswordTextFormField(
                       style: const TextStyle(
                         fontSize: 18,
-                        color: Colors.white,
+                        color: Colors.black54,
                       ),
                       decoration: registerInputDecoration(hintText: 'Password'),
                     ),
@@ -66,6 +71,7 @@ class Register extends StatelessWidget {
                     isLoading: isSubmitting,
                     onPressed: () {
                       context.registerWithEmailAndPassword();
+                      createRecord(databaseReference, fullname.text);
                     },
                   ),
                   Align(
@@ -92,5 +98,9 @@ class Register extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void createRecord(CollectionReference f, String name) async {
+    await f.add({'name': name});
   }
 }

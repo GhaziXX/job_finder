@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:job_finder/config/Palette.dart';
-import 'package:job_finder/screens/Main/Offers.dart';
+import 'package:job_finder/screens/Main/bottom_nav.dart';
 import 'package:job_finder/screens/auth/register.dart';
 import 'package:job_finder/screens/auth/sign_in.dart';
 import 'package:job_finder/screens/background_painter.dart';
@@ -58,14 +58,13 @@ class _AuthScreenState extends State<AuthScreen>
           ),
         ),
         onAuthSuccess: () {
-          Navigator.of(context).pushReplacement(MyHomePage.route);
+          Navigator.of(context).pushReplacement(BottomNav.route);
         },
         child: Stack(
           children: [
             SizedBox.expand(
               child: CustomPaint(
-                painter: BackgroundPainter(
-                ),
+                painter: BackgroundPainter(),
               ),
             ),
             Center(
