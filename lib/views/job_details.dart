@@ -25,7 +25,7 @@ class JobDetail extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          company.companyName,
+          company.company,
           style: kTitleStyle,
         ),
         centerTitle: true,
@@ -50,36 +50,26 @@ class JobDetail extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Center(
-                      child: Container(
-                        width: 70.0,
-                        height: 70.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          image: DecorationImage(
-                            image: AssetImage(company.image),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
+                      child: SizedBox(height:60,width:60, child: Image(image : NetworkImage(company.companyLogo))),
                     ),
                     SizedBox(height: 20.0),
-                    Text(
-                      company.job,
-                      style: kTitleStyle.copyWith(
-                        fontWeight: FontWeight.bold,
+                    FittedBox(
+                      child: Text(
+                        company.title,
+                        style: kTitleStyle.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     SizedBox(height: 15.0),
                     Text(
-                      company.sallary,
+                      'salary',
                       style: kSubtitleStyle,
                     ),
                     SizedBox(height: 15.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: company.tag
-                          .map(
-                            (e) => Container(
+                      children: [ Container(
                               margin: EdgeInsets.symmetric(horizontal: 5.0),
                               padding: EdgeInsets.symmetric(
                                 horizontal: 8.0,
@@ -91,13 +81,11 @@ class JobDetail extends StatelessWidget {
                                     color: Colors.black.withOpacity(.5)),
                               ),
                               child: Text(
-                                e,
+                                company.time,
                                 style: kSubtitleStyle,
                               ),
                             ),
-                          )
-                          .toList(),
-                    ),
+                          ]),
                     SizedBox(height: 25.0),
                     Material(
                       color: Colors.white,
@@ -161,7 +149,7 @@ class JobDetail extends StatelessWidget {
                 child: SizedBox(
                   height: 50.0,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {launchURL(company.offerURL);},
                     color: Palette.darkCornflowerBlue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),

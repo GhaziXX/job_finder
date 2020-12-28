@@ -15,12 +15,19 @@ class Offers extends StatefulWidget {
   @override
   _OffersState createState() => _OffersState();
 }
-
+Future<List<Company>> futurePopularOffer;
+Future<List<Company>> futureRecentOffer;
 class _OffersState extends State<Offers> {
   static String name = "";
   static String dname = "";
 
   @override
+  void initState(){
+    super.initState();
+    futurePopularOffer= fetchOffer(tag:'ruby',page: 0);
+    futureRecentOffer = fetchOffer(tag:'python',location: 'san francisco',fullTime: 'true');
+  }
+
   Widget build(BuildContext context) {
     final databaseReference =
         FirebaseFirestore.instance.collection("users_data");
@@ -104,7 +111,7 @@ class _OffersState extends State<Offers> {
                   "Popular Company",
                   style: kSectionTitleStyle,
                 ),
-                SizedBox(width: 110.0),
+                SizedBox(width: 90.0),
                 Text(
                   "Show more",
                   style: kTitleStyle,
@@ -114,63 +121,83 @@ class _OffersState extends State<Offers> {
               Container(
                 width: double.infinity,
                 height: 190.0,
-                child: ListView.builder(
-                  itemCount: companyList.length,
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    var company = companyList[index];
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => JobDetail(
-                              company: company,
-                            ),
-                          ),
+                child: FutureBuilder<List<Company>>(
+                  future: futurePopularOffer,
+                  builder: (context,snapshot) {
+                    if(snapshot.hasData){
+                    return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        var company = snapshot.data[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => JobDetail(
+                                  company: company,
+                                ),
+                              ),
+                            );
+                          },
+                          child: CompanyCard(company: company),
                         );
                       },
-                      child: CompanyCard(company: company),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(height: 35.0),
-              Row(children: [
-                Text(
-                  "Recent Jobs",
-                  style: kSectionTitleStyle,
-                ),
-                SizedBox(width: 165.0),
-                Text(
-                  "Show more",
-                  style: kTitleStyle,
-                ),
+                    );}
+                    else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                    }
+                    return CircularProgressIndicator(strokeWidth: 1,);
+                    }),
+                    ),
+                    SizedBox(height: 35.0),
+                    Row(children: [
+                    Text(
+                    "Recent Jobs",
+                    style: kSectionTitleStyle,
+                    ),
+                    SizedBox(width: 145.0),
+                    Text(
+                    "Show more",
+                    style: kTitleStyle,
+                    ),
               ]),
-              ListView.builder(
-                itemCount: recentList.length,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  var recent = recentList[index];
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => JobDetail(
-                            company: recent,
-                          ),
-                        ),
-                      );
-                    },
-                    child: RecentJobCard(company: recent),
-                  );
-                },
-              ),
+              FutureBuilder <List<Company>>(
+                future: futureRecentOffer,
+                builder: (context,snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        var recent = snapshot.data[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    JobDetail(
+                                      company: recent,
+                                    ),
+                              ),
+                            );
+                          },
+                          child: RecentJobCard(company: recent),
+                        );
+                      },
+                    );
+                  }
+                  else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  return CircularProgressIndicator(strokeWidth: 1,);
+                }),
             ],
           ),
         ),

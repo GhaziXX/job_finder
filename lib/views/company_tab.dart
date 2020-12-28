@@ -18,7 +18,7 @@ class CompanyTab extends StatelessWidget {
           ),
           SizedBox(height: 15.0),
           Text(
-            company.aboutCompany,
+            company.company+'\n'+company.companyURL,
             style: kSubtitleStyle.copyWith(
               fontWeight: FontWeight.w300,
               height: 1.5,

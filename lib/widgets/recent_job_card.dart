@@ -15,25 +15,15 @@ class RecentJobCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: ListTile(
-        leading: Container(
-          width: 50.0,
-          height: 50.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            image: DecorationImage(
-              image: AssetImage(company.image),
-              fit: BoxFit.cover,
-            ),
+        leading: SizedBox(height:80,width:80, child: Image(image : NetworkImage(company.companyLogo))),
+        title: FittedBox(child: Text(company.title, style: kTitleStyle)),
+        subtitle: FittedBox(
+          child: Text(
+            "${company.company} • ${company.time}",
           ),
         ),
-        title: Text(company.job, style: kTitleStyle),
-        subtitle: Text(
-          "${company.companyName} • ${company.mainCriteria}",
-        ),
-        trailing: Icon(
-          Icons.favorite_outline,
-          color: Colors.black,
-        ),
+        trailing:IconButton(icon: Icon(Icons.favorite_outline), onPressed: () {}),
+        isThreeLine: true,
       ),
     );
   }

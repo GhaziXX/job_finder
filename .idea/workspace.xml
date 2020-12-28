@@ -5,34 +5,39 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f59acc18-e86e-4216-94fa-7c2c39194fc3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/Main/Offers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/Offers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="RF8N11E26KM" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DEQKNRAU7SIJZPPZ]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1kTkodzUay353VAsmcqNxdAe7PV" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -54,29 +59,35 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1607869804830">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="449" y="102" key="FileChooserDialogImpl" timestamp="1609181728329">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1607869804830" />
-    <state width="1236" height="158" key="GridCell.Tab.0.bottom" timestamp="1607893350203">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="449" y="102" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609181728329" />
+    <state width="1323" height="136" key="GridCell.Tab.0.bottom" timestamp="1609184770020">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1236" height="158" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1607893350203" />
-    <state width="1236" height="158" key="GridCell.Tab.0.center" timestamp="1607893350202">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1323" height="136" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609184770020" />
+    <state width="1323" height="136" key="GridCell.Tab.0.center" timestamp="1609184770020">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1236" height="158" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1607893350202" />
-    <state width="1236" height="158" key="GridCell.Tab.0.left" timestamp="1607893350202">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1323" height="136" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609184770020" />
+    <state width="1323" height="136" key="GridCell.Tab.0.left" timestamp="1609184770019">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1236" height="158" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1607893350202" />
-    <state width="1236" height="158" key="GridCell.Tab.0.right" timestamp="1607893350203">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1323" height="136" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609184770019" />
+    <state width="1323" height="136" key="GridCell.Tab.0.right" timestamp="1609184770020">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1236" height="158" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1607893350203" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1607454951535">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1323" height="136" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609184770020" />
+    <state x="152" y="0" key="SettingsEditor" timestamp="1609181732761">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1607454951535" />
+    <state x="152" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1609181732761" />
   </component>
 </project>

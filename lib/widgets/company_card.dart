@@ -21,35 +21,28 @@ class CompanyCard extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  image: DecorationImage(
-                    image: AssetImage(company.image),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              SizedBox(height:60,width:60, child: Image(image : NetworkImage(company.companyLogo))),
               Spacer(),
               Text(
-                company.sallary,
+                'Salary',
                 style: kTitleStyle,
               ),
             ],
           ),
           SizedBox(height: 15.0),
-          Text(
-            company.job,
-            style: kTitleStyle,
+          FittedBox(
+            child: Text(
+              company.title,
+              style: kTitleStyle,
+            ),
           ),
           SizedBox(height: 15.0),
-          RichText(
+          FittedBox(
+              child :RichText(
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: company.companyName,
+                  text: company.company,
                   style: kSubtitleStyle,
                 ),
                 TextSpan(
@@ -57,18 +50,16 @@ class CompanyCard extends StatelessWidget {
                   style: kSubtitleStyle,
                 ),
                 TextSpan(
-                  text: company.city,
+                  text: company.location,
                   style: kSubtitleStyle,
                 ),
               ],
             ),
-          ),
+          )),
           SizedBox(height: 15.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: company.tag
-                .map(
-                  (e) => Container(
+            children:[Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(right: 10.0),
                     padding:
@@ -81,16 +72,16 @@ class CompanyCard extends StatelessWidget {
                         width: 0.5,
                       ),
                     ),
-                    child: Text(
-                      e,
-                      style: kSubtitleStyle.copyWith(
-                        fontSize: 12.0,
+                    child: FittedBox(
+                      child: Text(
+                        company.time,
+                        style: kSubtitleStyle.copyWith(
+                          fontSize: 12.0,
+                        ),
                       ),
                     ),
                   ),
-                )
-                .toList(),
-          ),
+                ]),
         ],
       ),
     );
