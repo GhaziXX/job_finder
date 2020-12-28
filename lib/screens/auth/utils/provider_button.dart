@@ -20,7 +20,7 @@ class _ProviderButtonState extends State<ProviderButton> {
         return InkWell(
           onTap: () => context.signInWithGoogle(),
           child: Container(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -39,7 +39,7 @@ class _ProviderButtonState extends State<ProviderButton> {
         return InkWell(
           onTap: () => context.signInWithTwitter(),
           child: Container(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
