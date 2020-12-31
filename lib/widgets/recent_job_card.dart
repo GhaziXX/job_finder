@@ -22,7 +22,7 @@ class RecentJobCard extends StatelessWidget {
             "${company.company} • ${company.time}",
           ),
         ),
-        trailing:IconButton(icon: Icon(Icons.favorite_outline), onPressed: () {}),
+        trailing:IconButton(icon: Icon(Icons.favorite), onPressed: () {}),
         isThreeLine: true,
       ),
     );

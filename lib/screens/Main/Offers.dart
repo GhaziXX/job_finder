@@ -8,25 +8,63 @@ import 'package:job_finder/views/job_details.dart';
 import 'package:job_finder/widgets/company_card.dart';
 import 'package:job_finder/widgets/recent_job_card.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class Offers extends StatefulWidget {
   Offers({Key key}) : super(key: key);
 
   @override
   _OffersState createState() => _OffersState();
+
 }
+class FilterClass {
+  String title;
+  bool value;
+  FilterClass(this.title, this.value);
+  @override
+  String toString() {
+    return 'FilterClass{title: $title, value: $value}';
+  }
+}
+
 Future<List<Company>> futurePopularOffer;
 Future<List<Company>> futureRecentOffer;
 class _OffersState extends State<Offers> {
   static String name = "";
   static String dname = "";
+  int present = 0;
+  int perPage = 15;
+  final originalItems = List<String>.generate(100, (i) => "Item $i");
 
+  final myText = TextEditingController(); //Search text input
+  final myLocation = TextEditingController(); //Location description
+  final  List<FilterClass> filterlist = List();
+  bool pressAttention = false;
+  var items = List<String>();
   @override
   void initState(){
+    items.addAll(originalItems);
+    setState(() {
+      items.addAll(originalItems.getRange(present, present + perPage));
+      present = present + perPage;
+    });
     super.initState();
     futurePopularOffer= fetchOffer(tag:'ruby',page: 0);
     futureRecentOffer = fetchOffer(tag:'python',location: 'san francisco',fullTime: 'true');
   }
+  void loadMore() {
+    setState(() {
+      if((present + perPage )> originalItems.length) {
+        items.addAll(
+            originalItems.getRange(present, originalItems.length));
+      } else {
+        items.addAll(
+            originalItems.getRange(present, present + perPage));
+      }
+      present = present + perPage;
+    });
+  }
+  bool checked = false;
 
   Widget build(BuildContext context) {
     final databaseReference =
@@ -96,10 +134,83 @@ class _OffersState extends State<Offers> {
                         color: Palette.navyBlue,
                         borderRadius: BorderRadius.circular(12.0),
                       ),
-                      child: Icon(
-                        FontAwesomeIcons.slidersH,
-                        color: Colors.white,
-                        size: 20.0,
+                      child: FlatButton( //filter
+                        onPressed: () {
+                          showMaterialModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return StatefulBuilder(
+                                    builder: (BuildContext context, StateSetter setState) {
+
+                                      return Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Column(
+                                            children :[
+                                              SizedBox(height: 100),
+                                              Text('Filters',
+                                                style: TextStyle(
+                                                    fontSize: 30,
+                                                    fontWeight: FontWeight.bold
+                                                ),),
+                                              SizedBox(
+                                                height : 30.0,
+                                              ),
+                                              TextField(
+                                                controller: myLocation, //to get the info in myText : myText.text
+
+                                                cursorColor: Colors.black,
+                                                decoration: InputDecoration(
+                                                  icon: Icon(
+                                                    Icons.home,
+                                                    size: 20.0,
+                                                    color: Colors.black,
+                                                  ),
+                                                  border: InputBorder.none,
+                                                  hintText: "Location",
+                                                  hintStyle: kSubtitleStyle.copyWith(
+                                                    color: Palette.navyBlue,
+                                                  ),
+                                                ),
+                                              ),
+
+                                              Row(
+                                                children: [
+                                                  SizedBox(width : 15),
+
+                                                  Text('Fulltime Job'),
+                                                  SizedBox(width : 10),
+                                                  Checkbox(
+                                                    value : checked,
+                                                    onChanged:  (bool value) {
+                                                      setState(() {
+                                                        checked = value;
+                                                        filterlist.add(FilterClass(myLocation.text,value));
+                                                        print(filterlist.toString());
+                                                      });
+
+                                                    },
+                                                    activeColor: Colors.blueAccent,
+                                                  ),
+                                                ],
+                                              ),
+
+                                            ]
+                                        ),
+                                      );
+
+                                    });
+
+                              });
+
+
+
+
+                        },
+                        child: Icon(
+                          FontAwesomeIcons.slidersH,
+                          color: Colors.white,
+                          size: 20.0,
+                        ),
                       ),
                     )
                   ],
@@ -112,11 +223,56 @@ class _OffersState extends State<Offers> {
                   style: kSectionTitleStyle,
                 ),
                 SizedBox(width: 90.0),
-                Text(
-                  "Show more",
-                  style: kTitleStyle,
+                Container(
+
+                  child: FlatButton(
+                    child: Text("Load More"),
+                    onPressed: () {
+                      showMaterialModalBottomSheet(
+                          context: context,
+                          builder: (context) =>
+                              Column(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child:NotificationListener<ScrollNotification>(
+                                        onNotification: (ScrollNotification scrollInfo) {
+                                          if (scrollInfo.metrics.pixels ==
+                                              scrollInfo.metrics.maxScrollExtent) {
+                                            loadMore();
+                                          }
+                                        },
+                                        child:
+                                        ListView.builder(
+                                          itemCount: (present <= originalItems.length) ? items.length + 1 : items.length,
+                                          itemBuilder: (context, index) {
+                                            return (index == items.length ) ?
+                                            Container(
+                                              color: Colors.greenAccent,
+
+                                            )
+                                                :
+                                            ListTile(
+                                              title: Text('${items[index]}'),
+                                            );
+                                          },
+                                        ),
+                                      ),
+
+                                    ),
+
+                                  ]
+
+                              )
+                      );
+
+                    },
+
+
+                  ),
+
                 ),
-              ]),
+              ]
+              ),
               SizedBox(height: 15.0),
               Container(
                 width: double.infinity,

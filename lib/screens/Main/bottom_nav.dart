@@ -59,7 +59,7 @@ class _BottomNavState extends State<BottomNav> {
                 activeColor: Palette.starCommandBlue,
                 textAlign: TextAlign.center),
             BottomNavyBarItem(
-                icon: Icon(Icons.work_outline),
+                icon: Icon(Icons.work),
                 title: Text("Applications"),
                 activeColor: Palette.blueGreen,
                 textAlign: TextAlign.center),
