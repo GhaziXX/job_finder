@@ -80,10 +80,10 @@ class _BottomNavState extends State<BottomNav> {
     f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
       int l = snapshot.docs.length;
-      String id = d[l - 1].id;
+
       for (var i = 0; i < l; i++) {
-        if (d[i].data().length<2) {
-          updateData(f, id, uid);
+        if (d[i].data().length < 2) {
+          updateData(f, d[i].id, uid);
           break;
         }
       }

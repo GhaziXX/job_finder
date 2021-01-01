@@ -14,8 +14,6 @@ class Offers extends StatefulWidget {
   Offers({Key key}) : super(key: key);
   @override
   _OffersState createState() => _OffersState();
-}
-
 Future<List<Company>> futurePopularOffer;
 Future<List<Company>> futureRecentOffer;
 Future<List<Company>> futureSearchOffer;
@@ -23,7 +21,6 @@ Future<List<Company>> futureSearchOffer;
 class _OffersState extends State<Offers> {
 
   static String name = "";
-  static String dname = "";
   TextEditingController myText;//Search text input
   TextEditingController myLocation;
   //Location description
@@ -43,7 +40,7 @@ class _OffersState extends State<Offers> {
     myDescription = TextEditingController(); //description
 
   }
-  void getName(CollectionReference f, String uid) {
+  void getName(CollectionReference f, String uid) async {
     f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
       d.forEach((element) {
@@ -62,11 +59,7 @@ class _OffersState extends State<Offers> {
     String uid = "";
     litUser.when((user) => dname = user.displayName, empty: () {}, initializing: () {});
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
-    if (dname != null) {
-      name = dname;
-    } else {
-      getName(databaseReference, uid);
-    }
+     getName(databaseReference, uid);
     return Scaffold(
       backgroundColor: Palette.powderBlue,
       body: Container(

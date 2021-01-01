@@ -5,6 +5,7 @@ import 'package:job_finder/models/compay.dart';
 
 import 'company_tab.dart';
 import 'description_tab.dart';
+import 'howto_tab.dart';
 
 class JobDetail extends StatelessWidget {
   final Company company;
@@ -28,7 +29,7 @@ class JobDetail extends StatelessWidget {
         centerTitle: true,
       ),
       body: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Container(
           width: double.infinity,
           // margin: EdgeInsets.only(top: 50.0),
@@ -76,6 +77,7 @@ class JobDetail extends StatelessWidget {
                         tabs: [
                           Tab(text: "Description"),
                           Tab(text: "Company"),
+                          Tab(text: "How to Apply")
                         ],
                       ),
                     )
@@ -88,6 +90,7 @@ class JobDetail extends StatelessWidget {
                   children: [
                     DescriptionTab(company: company),
                     CompanyTab(company: company),
+                    HowToTab(company: company)
                   ],
                 ),
               )
@@ -116,7 +119,9 @@ class JobDetail extends StatelessWidget {
                 child: SizedBox(
                   height: 50.0,
                   child: RaisedButton(
-                    onPressed: () {launchURL(company.offerURL);},
+                    onPressed: () {
+                      launchURL(company.offerURL);
+                    },
                     color: Palette.darkCornflowerBlue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
