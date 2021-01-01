@@ -6,6 +6,7 @@ import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/screens/auth/auth.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:job_finder/widgets/Tags.dart';
 
 
 
@@ -119,6 +120,46 @@ class _SettingsPageState extends State<SettingsPage> {
                   },
                 ),
               ]
+          ),
+          RaisedButton(
+            onPressed: () {
+              showMaterialModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return
+                      Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Tag(
+                                        category: 'python',
+
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    Tag(category : 'python'),
+                                    Tag(category : "JavaScript"),
+
+                                  ],
+                                ),
+                              ),
+                            ]
+                        ),
+                      );
+
+                  });
+
+            },
+
+            child: Text('Job Categories'),
           ),
           RaisedButton(
             onPressed: () {

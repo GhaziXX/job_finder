@@ -25,7 +25,10 @@ class _OffersState extends State<Offers> {
   static String name = "";
   static String dname = "";
   TextEditingController myText;//Search text input
-  TextEditingController myLocation; //Location description
+  TextEditingController myLocation;
+  //Location description
+  TextEditingController myDescription;
+
   final  List filterList = List();
   bool pressAttention = false;
   var items = List<String>();
@@ -37,6 +40,8 @@ class _OffersState extends State<Offers> {
     futureRecentOffer = fetchOffer();
     myText = TextEditingController();
     myLocation = TextEditingController();
+    myDescription = TextEditingController(); //description
+
   }
   void getName(CollectionReference f, String uid) {
     f.get().then((QuerySnapshot snapshot) {
@@ -172,6 +177,17 @@ class _OffersState extends State<Offers> {
                                                     icon: Icon(Icons.home, size: 25.0, color: Colors.black,),
                                                     border: InputBorder.none,
                                                     hintText: "Location",
+                                                    hintStyle: kSubtitleStyle.copyWith(color: Palette.navyBlue,),),),
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                                                child: TextField(
+                                                  controller: myDescription, //to get the info in myText : myText.text
+                                                  cursorColor: Colors.black,
+                                                  decoration: InputDecoration(
+                                                    icon: Icon(Icons.business_center, size: 25.0, color: Colors.black,),
+                                                    border: InputBorder.none,
+                                                    hintText: "Job Description",
                                                     hintStyle: kSubtitleStyle.copyWith(color: Palette.navyBlue,),),),
                                               ),
                                               Row(
