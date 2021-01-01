@@ -5,6 +5,7 @@ import 'package:job_finder/models/compay.dart';
 
 import 'company_tab.dart';
 import 'description_tab.dart';
+import 'howto_tab.dart';
 
 class JobDetail extends StatelessWidget {
   final Company company;
@@ -31,7 +32,7 @@ class JobDetail extends StatelessWidget {
         centerTitle: true,
       ),
       body: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Container(
           width: double.infinity,
           // margin: EdgeInsets.only(top: 50.0),
@@ -50,7 +51,11 @@ class JobDetail extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Center(
-                      child: SizedBox(height:60,width:60, child: Image(image : NetworkImage(company.companyLogo))),
+                      child: SizedBox(
+                          height: 60,
+                          width: 60,
+                          child:
+                              Image(image: NetworkImage(company.companyLogo))),
                     ),
                     SizedBox(height: 20.0),
                     FittedBox(
@@ -67,25 +72,24 @@ class JobDetail extends StatelessWidget {
                       style: kSubtitleStyle,
                     ),
                     SizedBox(height: 15.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [ Container(
-                              margin: EdgeInsets.symmetric(horizontal: 5.0),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                                vertical: 5.0,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                border: Border.all(
-                                    color: Colors.black.withOpacity(.5)),
-                              ),
-                              child: Text(
-                                company.time,
-                                style: kSubtitleStyle,
-                              ),
-                            ),
-                          ]),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 5.0,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          border:
+                              Border.all(color: Colors.black.withOpacity(.5)),
+                        ),
+                        child: Text(
+                          company.time,
+                          style: kSubtitleStyle,
+                        ),
+                      ),
+                    ]),
                     SizedBox(height: 25.0),
                     Material(
                       color: Colors.white,
@@ -105,6 +109,7 @@ class JobDetail extends StatelessWidget {
                         tabs: [
                           Tab(text: "Description"),
                           Tab(text: "Company"),
+                          Tab(text: "How to Apply")
                         ],
                       ),
                     )
@@ -117,6 +122,7 @@ class JobDetail extends StatelessWidget {
                   children: [
                     DescriptionTab(company: company),
                     CompanyTab(company: company),
+                    HowToTab(company: company)
                   ],
                 ),
               )
@@ -149,7 +155,9 @@ class JobDetail extends StatelessWidget {
                 child: SizedBox(
                   height: 50.0,
                   child: RaisedButton(
-                    onPressed: () {launchURL(company.offerURL);},
+                    onPressed: () {
+                      launchURL(company.offerURL);
+                    },
                     color: Palette.darkCornflowerBlue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
