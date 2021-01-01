@@ -12,67 +12,50 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class Offers extends StatefulWidget {
   Offers({Key key}) : super(key: key);
-
   @override
   _OffersState createState() => _OffersState();
-
-}
-class FilterClass {
-  String title;
-  bool value;
-  FilterClass(this.title, this.value);
-  @override
-  String toString() {
-    return 'FilterClass{title: $title, value: $value}';
-  }
 }
 
 Future<List<Company>> futurePopularOffer;
 Future<List<Company>> futureRecentOffer;
+Future<List<Company>> futureSearchOffer;
+
 class _OffersState extends State<Offers> {
+
   static String name = "";
   static String dname = "";
-  int present = 0;
-  int perPage = 15;
-  final originalItems = List<String>.generate(100, (i) => "Item $i");
-
-  final myText = TextEditingController(); //Search text input
-  final myLocation = TextEditingController(); //Location description
-  final  List<FilterClass> filterlist = List();
+  TextEditingController myText;//Search text input
+  TextEditingController myLocation; //Location description
+  final  List filterList = List();
   bool pressAttention = false;
   var items = List<String>();
+  bool checked = false;
   @override
   void initState(){
-    items.addAll(originalItems);
-    setState(() {
-      items.addAll(originalItems.getRange(present, present + perPage));
-      present = present + perPage;
-    });
     super.initState();
     futurePopularOffer= fetchOffer(tag:'ruby',page: 0);
-    futureRecentOffer = fetchOffer(tag:'python',location: 'san francisco',fullTime: 'true');
+    futureRecentOffer = fetchOffer();
+    myText = TextEditingController();
+    myLocation = TextEditingController();
   }
-  void loadMore() {
-    setState(() {
-      if((present + perPage )> originalItems.length) {
-        items.addAll(
-            originalItems.getRange(present, originalItems.length));
-      } else {
-        items.addAll(
-            originalItems.getRange(present, present + perPage));
-      }
-      present = present + perPage;
+  void getName(CollectionReference f, String uid) {
+    f.get().then((QuerySnapshot snapshot) {
+      List<QueryDocumentSnapshot> d = snapshot.docs;
+      d.forEach((element) {
+        Map<String, dynamic> da = element.data();
+        if (da['uid'] == uid) {
+          setState(() {
+            name = da['name'].toString();
+          });
+        }
+      });
     });
   }
-  bool checked = false;
-
   Widget build(BuildContext context) {
-    final databaseReference =
-        FirebaseFirestore.instance.collection("users_data");
+    final databaseReference = FirebaseFirestore.instance.collection("users_data");
     final litUser = context.getSignedInUser();
     String uid = "";
-    litUser.when((user) => dname = user.displayName,
-        empty: () {}, initializing: () {});
+    litUser.when((user) => dname = user.displayName, empty: () {}, initializing: () {});
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     if (dname != null) {
       name = dname;
@@ -90,10 +73,7 @@ class _OffersState extends State<Offers> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(right: 32, top: 60, bottom: 3),
-                child: Text(
-                  "Welcome $name",
-                  style: kPageTitleStyle,
-                ),
+                child: Text("Welcome $name", style: kPageTitleStyle,),
               ),
               SizedBox(height: 25.0),
               Container(
@@ -110,30 +90,65 @@ class _OffersState extends State<Offers> {
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: TextField(
+                          controller: myText,
                           cursorColor: Colors.black,
                           decoration: InputDecoration(
-                            icon: Icon(
-                              Icons.search,
-                              size: 25.0,
-                              color: Colors.black,
-                            ),
                             border: InputBorder.none,
-                            hintText: "Search for job title",
-                            hintStyle: kSubtitleStyle.copyWith(
-                              color: Palette.navyBlue,
-                            ),
+                            hintText: "Search for an opportunity",
+                            hintStyle: kSubtitleStyle.copyWith(color: Palette.navyBlue,),
                           ),
+                          onSubmitted: (String value) async {
+                            await showMaterialModalBottomSheet(
+                              context: context,
+                                builder: (BuildContext context) {
+                                  return FutureBuilder <List<Company>>(
+                                      future:fetchOffer(tag:myText.text,location: myLocation.text,fullTime: checked.toString()),
+                                      builder: (context, snapshot)  {
+                                        if (snapshot.hasData) {
+                                          return StatefulBuilder(
+                                              builder: (BuildContext context, StateSetter setState){
+                                                return SingleChildScrollView(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      SizedBox(height: 30,),
+                                                      Row(
+                                                        children: [
+                                                          SizedBox(width: 20),
+                                                          Text('Search result for : \n'+myText.text,style: kSectionTitleStyle),
+                                                        ],
+                                                      ),
+                                                      SizedBox(height: 10,),
+                                                      ListView.builder(
+                                                        itemCount: snapshot.data.length,
+                                                        scrollDirection: Axis.vertical,
+                                                        shrinkWrap: true,
+                                                        physics: ScrollPhysics(),
+                                                        itemBuilder: (context, index) {
+                                                          var recent = snapshot.data[index];
+                                                          return InkWell(
+                                                            onTap: () {
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => JobDetail(company: recent,),),);
+                                                            },
+                                                            child: RecentJobCard(company: recent),
+                                                          );
+                                                        }),
+                                                    ]),
+                                                );}
+                                          );
+                                        }
+                                        else if (snapshot.hasError) {
+                                          return Text("${snapshot.error}");
+                                        }
+                                        return Center(child: SizedBox(height:50,width:50,child: CircularProgressIndicator(strokeWidth: 1,)));
+                                      })
+                                  ;});
+                        },)
                         ),
                       ),
-                    ),
-                    Container(
-                      width: 50.0,
-                      height: 50.0,
+                    Container(width: 50.0, height: 50.0,
                       margin: EdgeInsets.only(left: 12.0),
-                      decoration: BoxDecoration(
-                        color: Palette.navyBlue,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                      decoration: BoxDecoration(color: Palette.navyBlue, borderRadius: BorderRadius.circular(12.0),),
                       child: FlatButton( //filter
                         onPressed: () {
                           showMaterialModalBottomSheet(
@@ -141,77 +156,43 @@ class _OffersState extends State<Offers> {
                               builder: (BuildContext context) {
                                 return StatefulBuilder(
                                     builder: (BuildContext context, StateSetter setState) {
-
-                                      return Padding(
-                                        padding: const EdgeInsets.all(20.0),
+                                      return SingleChildScrollView(
                                         child: Column(
                                             children :[
-                                              SizedBox(height: 100),
+                                              SizedBox(height: 20),
                                               Text('Filters',
-                                                style: TextStyle(
-                                                    fontSize: 30,
-                                                    fontWeight: FontWeight.bold
-                                                ),),
-                                              SizedBox(
-                                                height : 30.0,
+                                                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+                                              SizedBox(height : 20),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                                                child: TextField(
+                                                  controller: myLocation, //to get the info in myText : myText.text
+                                                  cursorColor: Colors.black,
+                                                  decoration: InputDecoration(
+                                                    icon: Icon(Icons.home, size: 25.0, color: Colors.black,),
+                                                    border: InputBorder.none,
+                                                    hintText: "Location",
+                                                    hintStyle: kSubtitleStyle.copyWith(color: Palette.navyBlue,),),),
                                               ),
-                                              TextField(
-                                                controller: myLocation, //to get the info in myText : myText.text
-
-                                                cursorColor: Colors.black,
-                                                decoration: InputDecoration(
-                                                  icon: Icon(
-                                                    Icons.home,
-                                                    size: 20.0,
-                                                    color: Colors.black,
-                                                  ),
-                                                  border: InputBorder.none,
-                                                  hintText: "Location",
-                                                  hintStyle: kSubtitleStyle.copyWith(
-                                                    color: Palette.navyBlue,
-                                                  ),
-                                                ),
-                                              ),
-
                                               Row(
                                                 children: [
                                                   SizedBox(width : 15),
-
-                                                  Text('Fulltime Job'),
-                                                  SizedBox(width : 10),
-                                                  Checkbox(
-                                                    value : checked,
+                                                  Checkbox(value : checked,
                                                     onChanged:  (bool value) {
-                                                      setState(() {
+                                                    setState(() {
                                                         checked = value;
-                                                        filterlist.add(FilterClass(myLocation.text,value));
-                                                        print(filterlist.toString());
-                                                      });
-
-                                                    },
+                                                        })
+                                                    ;},
                                                     activeColor: Colors.blueAccent,
                                                   ),
-                                                ],
-                                              ),
-
-                                            ]
+                                                  SizedBox(width : 10),
+                                                  Text('Full-Time Job'),
+                                                ],),]
                                         ),
                                       );
-
                                     });
-
-                              });
-
-
-
-
-                        },
-                        child: Icon(
-                          FontAwesomeIcons.slidersH,
-                          color: Colors.white,
-                          size: 20.0,
-                        ),
-                      ),
+                              });},
+                        child: Icon(FontAwesomeIcons.slidersH, color: Colors.white, size: 20.0,),),
                     )
                   ],
                 ),
@@ -219,60 +200,48 @@ class _OffersState extends State<Offers> {
               SizedBox(height: 35.0),
               Row(children: [
                 Text(
-                  "Popular Company",
+                  "For you",
                   style: kSectionTitleStyle,
                 ),
-                SizedBox(width: 90.0),
+                SizedBox(width: 170.0),
                 Container(
-
                   child: FlatButton(
                     child: Text("Load More"),
                     onPressed: () {
                       showMaterialModalBottomSheet(
                           context: context,
-                          builder: (context) =>
-                              Column(
-                                  children: <Widget>[
-                                    Expanded(
-                                      child:NotificationListener<ScrollNotification>(
-                                        onNotification: (ScrollNotification scrollInfo) {
-                                          if (scrollInfo.metrics.pixels ==
-                                              scrollInfo.metrics.maxScrollExtent) {
-                                            loadMore();
-                                          }
-                                        },
-                                        child:
-                                        ListView.builder(
-                                          itemCount: (present <= originalItems.length) ? items.length + 1 : items.length,
-                                          itemBuilder: (context, index) {
-                                            return (index == items.length ) ?
-                                            Container(
-                                              color: Colors.greenAccent,
-
-                                            )
-                                                :
-                                            ListTile(
-                                              title: Text('${items[index]}'),
-                                            );
-                                          },
-                                        ),
-                                      ),
-
-                                    ),
-
-                                  ]
-
-                              )
-                      );
-
-                    },
-
-
+                          builder: (BuildContext context) {
+                            return FutureBuilder <List<Company>>(
+                                future: futurePopularOffer,
+                                builder: (context, snapshot)  {
+                                  if (snapshot.hasData) {
+                                    return StatefulBuilder(
+                                        builder: (BuildContext context, StateSetter setState){
+                                          return ListView.builder(
+                                              itemCount: snapshot.data.length,
+                                              scrollDirection: Axis.vertical,
+                                              shrinkWrap: true,
+                                              physics: ScrollPhysics(),
+                                              itemBuilder: (context, index) {
+                                                var recent = snapshot.data[index];
+                                                return InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => JobDetail(company: recent,),),);
+                                                  },
+                                                  child: RecentJobCard(company: recent),
+                                                );
+                                              });}
+                                    );
+                                  }
+                                  else if (snapshot.hasError) {
+                                    return Text("${snapshot.error}");
+                                  }
+                                  return Center(child: SizedBox(height:50,width:50,child: CircularProgressIndicator(strokeWidth: 1,)));
+                                })
+                            ;}
+                      );},
                   ),
-
-                ),
-              ]
-              ),
+                ),]),
               SizedBox(height: 15.0),
               Container(
                 width: double.infinity,
@@ -282,7 +251,7 @@ class _OffersState extends State<Offers> {
                   builder: (context,snapshot) {
                     if(snapshot.hasData){
                     return ListView.builder(
-                      itemCount: snapshot.data.length,
+                      itemCount: 5,
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       physics: BouncingScrollPhysics(),
@@ -304,29 +273,57 @@ class _OffersState extends State<Offers> {
                       },
                     );}
                     else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
-                    }
-                    return CircularProgressIndicator(strokeWidth: 1,);
+                    return Text("${snapshot.error}");}
+                    return Center(child: SizedBox(height:50,width:50,child: CircularProgressIndicator(strokeWidth: 1,)));
                     }),
                     ),
-                    SizedBox(height: 35.0),
-                    Row(children: [
-                    Text(
-                    "Recent Jobs",
-                    style: kSectionTitleStyle,
-                    ),
-                    SizedBox(width: 145.0),
-                    Text(
-                    "Show more",
-                    style: kTitleStyle,
-                    ),
+              SizedBox(height: 35.0),
+              Row(children: [
+                Text("Recent Jobs", style: kSectionTitleStyle,),
+                SizedBox(width: 130.0),
+                FlatButton(
+                  child: Text("Load More"),
+                  onPressed: () {
+                    showMaterialModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return FutureBuilder <List<Company>>(
+                              future: futureRecentOffer,
+                              builder: (context, snapshot)  {
+                                if (snapshot.hasData) {
+                                  return StatefulBuilder(
+                                      builder: (BuildContext context, StateSetter setState){
+                                        return ListView.builder(
+                                            itemCount: snapshot.data.length,
+                                            scrollDirection: Axis.vertical,
+                                            shrinkWrap: true,
+                                            physics: ScrollPhysics(),
+                                            itemBuilder: (context, index) {
+                                              var recent = snapshot.data[index];
+                                              return InkWell(
+                                                onTap: () {
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => JobDetail(company: recent,),),);
+                                                },
+                                                child: RecentJobCard(company: recent),
+                                              );
+                                            });}
+                                  );
+                                }
+                                else if (snapshot.hasError) {
+                                  return Text("${snapshot.error}");
+                                }
+                                return Center(child: SizedBox(height:50,width:50,child: CircularProgressIndicator(strokeWidth: 1,)));
+                              })
+                          ;}
+                    );},
+                ),
               ]),
               FutureBuilder <List<Company>>(
                 future: futureRecentOffer,
                 builder: (context,snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
-                      itemCount: snapshot.data.length,
+                      itemCount: 5,
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       physics: ScrollPhysics(),
@@ -338,40 +335,19 @@ class _OffersState extends State<Offers> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    JobDetail(
-                                      company: recent,
-                                    ),
-                              ),
-                            );
-                          },
+                                    JobDetail(company: recent,),
+                              ),);},
                           child: RecentJobCard(company: recent),
-                        );
-                      },
-                    );
-                  }
+                        );},
+                    );}
                   else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
-                  }
-                  return CircularProgressIndicator(strokeWidth: 1,);
+                    return Text("${snapshot.error}");}
+                  return Center(child: SizedBox(height:50,width:50,child: CircularProgressIndicator(strokeWidth: 1,)));
                 }),
             ],
           ),
         ),
       ),
     );
-  }
-
-  void getName(CollectionReference f, String uid) {
-    f.get().then((QuerySnapshot snapshot) {
-      List<QueryDocumentSnapshot> d = snapshot.docs;
-      d.forEach((element) {
-        Map<String, dynamic> da = element.data();
-        if (da['uid'] == uid) {
-          setState(() {
-            name = da['name'].toString();
-          });
-        }
-      });
-    });
   }
 }
