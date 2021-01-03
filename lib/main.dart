@@ -10,6 +10,7 @@ import 'package:job_finder/screens/auth/auth.dart';
 
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +18,23 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen) {
+      return LitAuthState(
+        authenticated: BottomNav(),
+        unauthenticated: AuthScreen(),
+      );
+    } else {
+      prefs.setBool('seen', true);
+      return SplashView();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -27,7 +43,7 @@ class MyApp extends StatelessWidget {
           create: (context) => SplashModel(),
           builder: (context, orientation) {
             return FutureBuilder(
-              future: _initialization,
+              future: Future.wait([_initialization, checkFirstSeen()]),
               builder: (context, snapshot) {
                 // Check for errors
                 if (snapshot.hasError) {
@@ -35,9 +51,6 @@ class MyApp extends StatelessWidget {
                 }
                 // Once complete, show your application
                 if (snapshot.connectionState == ConnectionState.done) {
-                  // Initialize Lit Firebase Auth. Needs to be called before
-                  // `MaterialApp`, to ensure all of the child widget, even when
-                  // navigating to a new route, has access to the Lit auth methods
                   return LitAuthInit(
                     authProviders: const AuthProviders(
                         emailAndPassword: true, // enabled by default
@@ -55,7 +68,7 @@ class MyApp extends StatelessWidget {
                             color: Palette.blueGreen,
                           ),
                         ),
-                        home: SplashView()),
+                        home: snapshot.data[1]),
                   );
                 }
                 // Otherwise, show something while waiting for initialization to complete

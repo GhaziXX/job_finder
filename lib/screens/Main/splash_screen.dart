@@ -3,7 +3,10 @@ import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/config/SplashConstants.dart';
 import 'package:job_finder/models/splash.dart';
 import 'package:job_finder/screens/auth/auth.dart';
+import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:provider/provider.dart';
+
+import 'bottom_nav.dart';
 
 class AnimatedCircle extends AnimatedWidget {
   final Tween<double> tween;
