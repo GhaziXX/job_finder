@@ -23,7 +23,8 @@ Future<List<Company>> futureSearchOffer;
 
 class _OffersState extends State<Offers> {
   static String name = "";
-  static String stags;
+  static String stags = "Python";
+  static String oneTimeTags = "";
   TextEditingController myText; //Search text input
   TextEditingController myLocation;
   //Location description
@@ -87,7 +88,9 @@ class _OffersState extends State<Offers> {
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getName(databaseReference, uid);
     getTags(databaseReference, uid);
-    print(stags);
+    if (oneTimeTags != stags) {
+      oneTimeTags = stags;
+    }
 
     return Scaffold(
       backgroundColor: Palette.powderBlue,
@@ -332,7 +335,7 @@ class _OffersState extends State<Offers> {
                           context: context,
                           builder: (BuildContext context) {
                             return FutureBuilder<List<Company>>(
-                                future: futurePopularOffer,
+                                future: fetchOffer(tag: oneTimeTags),
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     return StatefulBuilder(builder:
@@ -383,7 +386,7 @@ class _OffersState extends State<Offers> {
                 width: double.infinity,
                 height: 190.0,
                 child: FutureBuilder<List<Company>>(
-                    future: fetchOffer(tag: stags),
+                    future: fetchOffer(tag: oneTimeTags),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(
