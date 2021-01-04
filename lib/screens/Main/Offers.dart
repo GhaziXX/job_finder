@@ -23,6 +23,7 @@ Future<List<Company>> futureSearchOffer;
 
 class _OffersState extends State<Offers> {
   static String name = "";
+  static String stags;
   TextEditingController myText; //Search text input
   TextEditingController myLocation;
   //Location description
@@ -35,7 +36,7 @@ class _OffersState extends State<Offers> {
   @override
   void initState() {
     super.initState();
-    futurePopularOffer = fetchOffer(tag: 'ruby', page: 0);
+    //futurePopularOffer = fetchOffer(tag: stags);
     futureRecentOffer = fetchOffer();
     myText = TextEditingController();
     myLocation = TextEditingController();
@@ -56,6 +57,28 @@ class _OffersState extends State<Offers> {
     });
   }
 
+  void getTags(CollectionReference f, String uid) async {
+    f.get().then((QuerySnapshot snapshot) {
+      List<QueryDocumentSnapshot> d = snapshot.docs;
+      String tag = "";
+      d.forEach((element) {
+        Map<String, dynamic> da = element.data();
+        if (da['uid'] == uid) {
+          da['tags'].forEach((element) {
+            tag += element + " ";
+          });
+          setState(() {
+            stags = tag;
+          });
+        }
+      });
+
+      // tags.forEach((element) {
+      //   stags += element + ",";
+      // });
+    });
+  }
+
   Widget build(BuildContext context) {
     final databaseReference =
         FirebaseFirestore.instance.collection("users_data");
@@ -63,6 +86,9 @@ class _OffersState extends State<Offers> {
     String uid = "";
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getName(databaseReference, uid);
+    getTags(databaseReference, uid);
+    print(stags);
+
     return Scaffold(
       backgroundColor: Palette.powderBlue,
       body: Container(
@@ -357,7 +383,7 @@ class _OffersState extends State<Offers> {
                 width: double.infinity,
                 height: 190.0,
                 child: FutureBuilder<List<Company>>(
-                    future: futurePopularOffer,
+                    future: fetchOffer(tag: stags),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(

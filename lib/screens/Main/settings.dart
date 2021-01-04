@@ -122,6 +122,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 },
                                 child: Column(
                                   children: [
+                                    SizedBox(height: 50,),
                                     Tag(category : 'python'),
                                     Tag(category : "JavaScript"),
 
