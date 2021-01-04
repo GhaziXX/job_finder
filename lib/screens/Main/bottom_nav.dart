@@ -76,8 +76,8 @@ class _BottomNavState extends State<BottomNav> {
     await f.add({'name': name, "uid": uid});
   }
 
-  void getData(CollectionReference f, String uid, String name) {
-    f.get().then((QuerySnapshot snapshot) {
+  void getData(CollectionReference f, String uid, String name) async {
+    await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
       int l = snapshot.docs.length;
 
@@ -100,9 +100,9 @@ class _BottomNavState extends State<BottomNav> {
     });
   }
 
-  void updateData(CollectionReference f, String id, String uid) {
+  void updateData(CollectionReference f, String id, String uid) async {
     try {
-      f.doc(id).update({'uid': uid});
+      await f.doc(id).update({'uid': uid});
     } catch (e) {
       print(e.toString());
     }

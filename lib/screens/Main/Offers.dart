@@ -37,7 +37,16 @@ class _OffersState extends State<Offers> {
   @override
   void initState() {
     super.initState();
+    final databaseReference =
+        FirebaseFirestore.instance.collection("users_data");
+    final litUser = context.getSignedInUser();
+    String uid = "";
+    litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
+    getName(databaseReference, uid);
+    getTags(databaseReference, uid);
+
     //futurePopularOffer = fetchOffer(tag: stags);
+    futurePopularOffer = fetchOffer(tag: oneTimeTags);
     futureRecentOffer = fetchOffer();
     myText = TextEditingController();
     myLocation = TextEditingController();
@@ -45,7 +54,7 @@ class _OffersState extends State<Offers> {
   }
 
   void getName(CollectionReference f, String uid) async {
-    f.get().then((QuerySnapshot snapshot) {
+    await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
       d.forEach((element) {
         Map<String, dynamic> da = element.data();
@@ -59,7 +68,7 @@ class _OffersState extends State<Offers> {
   }
 
   void getTags(CollectionReference f, String uid) async {
-    f.get().then((QuerySnapshot snapshot) {
+    await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
       String tag = "";
       d.forEach((element) {
@@ -68,15 +77,9 @@ class _OffersState extends State<Offers> {
           da['tags'].forEach((element) {
             tag += element + " ";
           });
-          setState(() {
-            stags = tag;
-          });
+          stags = tag;
         }
       });
-
-      // tags.forEach((element) {
-      //   stags += element + ",";
-      // });
     });
   }
 
@@ -88,10 +91,10 @@ class _OffersState extends State<Offers> {
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getName(databaseReference, uid);
     getTags(databaseReference, uid);
+    //print(oneTimeTags);
     if (oneTimeTags != stags) {
       oneTimeTags = stags;
     }
-
     return Scaffold(
       backgroundColor: Palette.powderBlue,
       body: Container(
@@ -386,9 +389,10 @@ class _OffersState extends State<Offers> {
                 width: double.infinity,
                 height: 190.0,
                 child: FutureBuilder<List<Company>>(
-                    future: fetchOffer(tag: oneTimeTags),
+                    future: futurePopularOffer,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
+                        print("fuckkkkkk");
                         return ListView.builder(
                           itemCount: 5,
                           scrollDirection: Axis.horizontal,
