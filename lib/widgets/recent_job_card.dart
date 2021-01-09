@@ -2,20 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:job_finder/config/FontsConstants.dart';
 import 'package:job_finder/models/compay.dart';
 import 'package:job_finder/screens/Main/bookmarked.dart';
+Color savedColor;
 
 class RecentJobCard extends StatefulWidget {
   final Company company;
-  static List<String> faves = List();
-
+  static List<Company> faves = List();
+  static List<String> identifier = List();
 
   RecentJobCard({this.company});
 
   @override
-  _RecentJobCardState createState() => _RecentJobCardState();
+  _RecentJobCardState createState() => _RecentJobCardState() ;
 }
 
-class _RecentJobCardState extends State<RecentJobCard> {
+class _RecentJobCardState extends State<RecentJobCard>{
+
+  @override
   bool isPressed = false;
+  void _increment() {
+    setState(() {
+      savedColor = Colors.red;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -34,18 +42,28 @@ class _RecentJobCardState extends State<RecentJobCard> {
           ),
         ),
         trailing: IconButton(icon: Icon(Icons.favorite),
-            color: isPressed ? Colors.red
-                : Colors.grey,
+            color : isPressed ? Colors.red : Colors.grey,
 
 
             onPressed: () {
               setState(() {
                 isPressed = !isPressed;
                 if (isPressed == true) {
-                  RecentJobCard.faves.add(widget.company.title);
+                  RecentJobCard.faves.add(widget.company);
+                  RecentJobCard.identifier.add(widget.company.id);
+                  //ektebli fonction upload el id
+
+
+
+
+
+
                 }
                 if (isPressed == false) {
-                  RecentJobCard.faves.remove(widget.company.title);
+                  RecentJobCard.faves.remove(widget.company);
+                  RecentJobCard.identifier.remove(widget.company.id);
+
+
                 }
 
                 print(RecentJobCard.faves);
@@ -75,4 +93,5 @@ class _RecentJobCardState extends State<RecentJobCard> {
       ),
     );
   }
+
 }

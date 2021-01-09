@@ -147,6 +147,12 @@ class _SettingsPageState extends State<SettingsPage> {
                                         children: [
                                           Tag(category : 'python'),
                                           Tag(category : "JavaScript"),
+                                          Tag(category : "Web development"),
+                                          Tag(category : "Mobile development"),
+                                          Tag(category : "Design"),
+
+
+
 
                                         ],
                                       ),

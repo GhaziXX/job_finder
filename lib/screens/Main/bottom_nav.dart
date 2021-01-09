@@ -11,8 +11,8 @@ import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 class BottomNav extends StatefulWidget {
   const BottomNav({Key key}) : super(key: key);
   static MaterialPageRoute get route => MaterialPageRoute(
-        builder: (context) => const BottomNav(),
-      );
+    builder: (context) => const BottomNav(),
+  );
 
   @override
   _BottomNavState createState() => _BottomNavState();
@@ -29,7 +29,7 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     final databaseReference =
-        FirebaseFirestore.instance.collection("users_data");
+    FirebaseFirestore.instance.collection("users_data");
     final litUser = context.getSignedInUser();
     String uid = "";
     String name = "";
@@ -76,8 +76,8 @@ class _BottomNavState extends State<BottomNav> {
     await f.add({'name': name, "uid": uid});
   }
 
-  void getData(CollectionReference f, String uid, String name) async {
-    await f.get().then((QuerySnapshot snapshot) {
+  void getData(CollectionReference f, String uid, String name) {
+    f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
       int l = snapshot.docs.length;
 
@@ -100,9 +100,9 @@ class _BottomNavState extends State<BottomNav> {
     });
   }
 
-  void updateData(CollectionReference f, String id, String uid) async {
+  void updateData(CollectionReference f, String id, String uid) {
     try {
-      await f.doc(id).update({'uid': uid});
+      f.doc(id).update({'uid': uid});
     } catch (e) {
       print(e.toString());
     }

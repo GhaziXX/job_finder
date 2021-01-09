@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder/config/Palette.dart';
+import 'package:job_finder/models/compay.dart';
 
 import 'package:job_finder/widgets/recent_job_card.dart';
 
 // ignore: must_be_immutable
 class BookmarkedPage extends StatefulWidget {
-  List<String> faves = List();
+  List<Company> faves = new List();
 
   BookmarkedPage({Key key,this.faves}) : super(key: key);
 
@@ -26,12 +27,18 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
       body: new Center(
         child: ListView.builder(
           itemCount: RecentJobCard.faves.length,
-          itemBuilder: (context, index) => Column(
-              children:[ ListTile(
-                title: Text(RecentJobCard.faves[index]),
-              ),
-              ]
-          ),
+          itemBuilder: (context, index) {
+            var recent = RecentJobCard.faves[index];
+
+           return Column(
+                children:[
+                  Container (
+                    child: RecentJobCard(company : recent),
+                    //ektbli fonction el download bech el card tjini houni 
+                ),
+                ]
+            );
+          },
         ),
       ),
 
