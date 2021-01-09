@@ -44,7 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
 
     return new Scaffold(
-      backgroundColor: Palette.powderBlue,
+      backgroundColor: Colors.white10,
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Align(

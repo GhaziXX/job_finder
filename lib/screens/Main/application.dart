@@ -15,7 +15,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Palette.powderBlue,
+      backgroundColor: Colors.white10,
       body: new Center(
         child: new Text("Applications Page"),
       ),

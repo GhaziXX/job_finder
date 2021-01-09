@@ -31,7 +31,7 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getBooks(databaseReference, uid);
     return new Scaffold(
-      backgroundColor: Palette.powderBlue,
+      backgroundColor: Colors.white10,
       body: new Center(
         child: ListView.builder(
           itemCount: RecentJobCard.faves.length,

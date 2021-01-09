@@ -72,9 +72,10 @@ class Register extends StatelessWidget {
                     isLoading: isSubmitting,
                     onPressed: () async {
                       context.registerWithEmailAndPassword();
+                      createRecord(databaseReference, fullname.text);
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
-                      createRecord(databaseReference, fullname.text);
+                      prefs.setString('name', fullname.text);
                     },
                   ),
                   Align(

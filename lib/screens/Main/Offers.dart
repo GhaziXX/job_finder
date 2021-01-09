@@ -9,6 +9,7 @@ import 'package:job_finder/widgets/company_card.dart';
 import 'package:job_finder/widgets/recent_job_card.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Offers extends StatefulWidget {
   Offers({Key key}) : super(key: key);
@@ -24,11 +25,11 @@ class _OffersState extends State<Offers> {
   static String name = "";
   static String stags = "Python";
   static String oneTimeTags = "";
+  static String nameFromShared = null;
   TextEditingController myText; //Search text input
   TextEditingController myLocation;
   //Location description
   TextEditingController myDescription;
-
   final List filterList = List();
   bool pressAttention = false;
   var items = List<String>();
@@ -41,7 +42,6 @@ class _OffersState extends State<Offers> {
     final litUser = context.getSignedInUser();
     String uid = "";
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
-    getName(databaseReference, uid);
     getTags(databaseReference, uid);
 
     futurePopularOffer = fetchOffer(tag: oneTimeTags);
@@ -49,6 +49,12 @@ class _OffersState extends State<Offers> {
     myText = TextEditingController();
     myLocation = TextEditingController();
     myDescription = TextEditingController(); //description
+  }
+
+  void getNameFromShared() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    nameFromShared = prefs.getString('name');
+    prefs.setString('name', "None");
   }
 
   void getName(CollectionReference f, String uid) async {
@@ -89,12 +95,16 @@ class _OffersState extends State<Offers> {
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getName(databaseReference, uid);
     getTags(databaseReference, uid);
-    print(name);
+    getNameFromShared();
+    print('this name is $nameFromShared');
+    if (nameFromShared != 'None' &&
+        nameFromShared != null &&
+        nameFromShared != "") name = nameFromShared;
     if (oneTimeTags != stags) {
       oneTimeTags = stags;
     }
     return Scaffold(
-      backgroundColor: Palette.powderBlue,
+      backgroundColor:Colors.white10,
       body: Container(
         margin: EdgeInsets.only(left: 18.0),
         child: SingleChildScrollView(
