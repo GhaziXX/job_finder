@@ -19,7 +19,6 @@ class Offers extends StatefulWidget {
 
 Future<List<Company>> futurePopularOffer;
 Future<List<Company>> futureRecentOffer;
-Future<List<Company>> futureSearchOffer;
 
 class _OffersState extends State<Offers> {
   static String name = "";
@@ -45,7 +44,7 @@ class _OffersState extends State<Offers> {
     getName(databaseReference, uid);
     getTags(databaseReference, uid);
 
-    //futurePopularOffer = fetchOffer(tag: stags);
+
     futurePopularOffer = fetchOffer(tag: oneTimeTags);
     futureRecentOffer = fetchOffer();
     myText = TextEditingController();
@@ -338,7 +337,7 @@ class _OffersState extends State<Offers> {
                           context: context,
                           builder: (BuildContext context) {
                             return FutureBuilder<List<Company>>(
-                                future: fetchOffer(tag: oneTimeTags),
+                                future: futurePopularOffer,
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     return StatefulBuilder(builder:
@@ -392,7 +391,6 @@ class _OffersState extends State<Offers> {
                     future: futurePopularOffer,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        print("fuckkkkkk");
                         return ListView.builder(
                           itemCount: 5,
                           scrollDirection: Axis.horizontal,

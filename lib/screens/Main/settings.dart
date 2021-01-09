@@ -112,8 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
 
-
-                    SizedBox(width : 95.0),
+                    SizedBox(width : 75.0),
                     Icon(
                       Icons.arrow_forward_ios,
                       size:20.0,
@@ -173,7 +172,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       ),
 
-                      SizedBox(width : 120.0),
+                      SizedBox(width : 95.0),
                       Icon(
                         Icons.arrow_forward_ios,
                         size:20.0,
@@ -195,7 +194,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         style : TextStyle(
                           fontSize: 20.0,
                         ),),
-                      SizedBox(width : 175.0),
+                      SizedBox(width : 153.0),
                       Icon(
                         Icons.arrow_forward_ios,
                         size:20.0,

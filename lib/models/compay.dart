@@ -33,6 +33,7 @@ String removeAllHtmlTags(String htmlText) {
 
 
 class Company {
+  String id;
   String title;
   String location;
   String time;
@@ -43,12 +44,13 @@ class Company {
   String date;
   String companyURL;
   String howTo;
-  Company({this.title,this.location,this.company,this.time,this.description,this.date,this.offerURL,this.companyLogo,this.companyURL,this.howTo});
+  Company({this.id,this.title,this.location,this.company,this.time,this.description,this.date,this.offerURL,this.companyLogo,this.companyURL,this.howTo});
 
 
   factory Company.fromJson(Map<String, dynamic> json) {
     return Company(
       title : json['title'],
+      id: json['id'],
       company: json['company'],
       companyURL : json['company_url'],
       location : json['location'],
