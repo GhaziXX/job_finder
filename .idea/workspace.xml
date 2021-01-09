@@ -10,24 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f59acc18-e86e-4216-94fa-7c2c39194fc3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/Main/bookmarked.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/bookmarked.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/Main/bottom_nav.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/bottom_nav.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/Main/settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/recent_job_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/recent_job_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/compay.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/compay.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="RF8N11E26KM" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -70,11 +64,11 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="449" y="102" key="FileChooserDialogImpl" timestamp="1609791041617">
+    <state x="449" y="102" key="FileChooserDialogImpl" timestamp="1610225607821">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1609767496154" />
-    <state x="449" y="102" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609791041617" />
+    <state x="449" y="102" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1610225607821" />
     <state width="1236" height="156" key="GridCell.Tab.0.bottom" timestamp="1610222712356">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -99,11 +93,11 @@
     <state width="1236" height="2" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1609767530934" />
     <state width="1236" height="156" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610222712355" />
     <state width="1323" height="124" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609793370389" />
-    <state x="152" y="0" key="SettingsEditor" timestamp="1609792505554">
+    <state x="152" y="0" key="SettingsEditor" timestamp="1610225610884">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1607454951535" />
-    <state x="152" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1609792505554" />
+    <state x="152" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1610225610884" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1609452087670">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
