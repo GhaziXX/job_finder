@@ -22,6 +22,19 @@ void launchURL(String url) async {
     throw 'Could not launch $url';
   }
 }
+Future<List<Company>> fetchOfferById({String id='' }) async {
+  var response = await get('https://jobs.github.com/positions/$id.json');
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    List jsonResponse=jsonDecode(response.body);
+    return jsonResponse.map((offer) => new Company.fromJson(offer)).toList();
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load data');
+  }
+}
 String removeAllHtmlTags(String htmlText) {
   RegExp exp = RegExp(
       r"<[^>]*>",
