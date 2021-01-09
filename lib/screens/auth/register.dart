@@ -5,6 +5,7 @@ import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:job_finder/screens/auth/utils/sign_in_up_bar.dart';
 import 'package:job_finder/screens/auth/utils/title.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Register extends StatelessWidget {
   const Register({Key key, this.onSignInPressed}) : super(key: key);
@@ -69,8 +70,10 @@ class Register extends StatelessWidget {
                   SignUpBar(
                     label: 'Sign up',
                     isLoading: isSubmitting,
-                    onPressed: () {
+                    onPressed: () async {
                       context.registerWithEmailAndPassword();
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
                       createRecord(databaseReference, fullname.text);
                     },
                   ),

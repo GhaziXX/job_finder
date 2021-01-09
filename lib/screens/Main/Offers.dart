@@ -44,7 +44,6 @@ class _OffersState extends State<Offers> {
     getName(databaseReference, uid);
     getTags(databaseReference, uid);
 
-
     futurePopularOffer = fetchOffer(tag: oneTimeTags);
     futureRecentOffer = fetchOffer();
     myText = TextEditingController();
@@ -90,7 +89,7 @@ class _OffersState extends State<Offers> {
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getName(databaseReference, uid);
     getTags(databaseReference, uid);
-    //print(oneTimeTags);
+    print(name);
     if (oneTimeTags != stags) {
       oneTimeTags = stags;
     }
