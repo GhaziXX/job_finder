@@ -21,7 +21,7 @@ class BookmarkedPage extends StatefulWidget {
 }
 
 class _BookmarkedPageState extends State<BookmarkedPage> {
-  static List<String> books;
+  static List<String> books = new List();
   @override
   Widget build(BuildContext context) {
     final databaseReference =
@@ -30,7 +30,6 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
     String uid = "";
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getBooks(databaseReference, uid);
-    print(books);
     return new Scaffold(
       backgroundColor: Palette.powderBlue,
       body: new Center(
@@ -53,13 +52,16 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
   void getBooks(CollectionReference f, String uid) async {
     await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
+      List<String> temp = new List();
       d.forEach((element) {
         Map<String, dynamic> da = element.data();
         if (da['uid'] == uid) {
-          books = da['bookmarked'];
-          print(books);
+          da['bookmarked'].forEach((element) {
+            temp.add(element);
+          });
         }
       });
+      books = temp;
     });
   }
 }
