@@ -40,7 +40,7 @@ class BackgroundPainter extends CustomPainter {
   void paintFirst(Canvas canvas, Size size) {
     final double x = size.width / 8;
     final double d = size.height / 3;
-    final double y = size.height / 16;
+    final double y = size.height / 32;
     final path = Path();
     path.moveTo(size.width, size.height / 2);
     path.lineTo(size.width, 0);
@@ -56,7 +56,7 @@ class BackgroundPainter extends CustomPainter {
       Point(6 * x, d - y),
       Point(7 * x, d + y),
       Point(8 * x, d - y),
-      Point(size.width, d),
+      Point(size.width+x, d),
     ]);
 
     canvas.drawPath(path, firstPaint);
@@ -65,7 +65,7 @@ class BackgroundPainter extends CustomPainter {
   void paintSec(Canvas canvas, Size size) {
     final double x = size.width / 8;
     final double d = size.height / 3.5;
-    final double y = size.height / 16;
+    final double y = size.height / 32;
     final path = Path();
     path.moveTo(size.width, d);
     path.lineTo(size.width, 0);
@@ -81,7 +81,7 @@ class BackgroundPainter extends CustomPainter {
       Point(6 * x, d - y),
       Point(7 * x, d + y),
       Point(8 * x, d - y),
-      Point(size.width, d),
+      Point(size.width+x, d),
     ]);
     canvas.drawPath(path, secPaint);
   }
@@ -89,7 +89,7 @@ class BackgroundPainter extends CustomPainter {
   void paintThird(Canvas canvas, Size size) {
     final double x = size.width / 8;
     final double d = size.height / 4.5;
-    final double y = size.height / 16;
+    final double y = size.height / 32;
     final path = Path();
     path.moveTo(size.width, d);
     path.lineTo(size.width, 0);
@@ -105,7 +105,7 @@ class BackgroundPainter extends CustomPainter {
       Point(6 * x, d - y),
       Point(7 * x, d + y),
       Point(8 * x, d - y),
-      Point(size.width, d),
+      Point(size.width+x, d),
     ]);
     canvas.drawPath(path, thirdPaint);
   }
@@ -113,7 +113,7 @@ class BackgroundPainter extends CustomPainter {
   void paintForth(Canvas canvas, Size size) {
     final double x = size.width / 8;
     final double d = size.height / 6;
-    final double y = size.height / 16;
+    final double y = size.height / 32;
     final path = Path();
     path.moveTo(size.width, d);
     path.lineTo(size.width, 0);
@@ -129,7 +129,7 @@ class BackgroundPainter extends CustomPainter {
       Point(6 * x, d - y),
       Point(7 * x, d + y),
       Point(8 * x, d - y),
-      Point(size.width, d),
+      Point(size.width+x, d),
     ]);
     canvas.drawPath(path, forthPaint);
   }
@@ -137,7 +137,7 @@ class BackgroundPainter extends CustomPainter {
   void paintFifth(Canvas canvas, Size size) {
     final double x = size.width / 8;
     final double d = size.height / 8;
-    final double y = size.height / 16;
+    final double y = size.height / 32;
     final path = Path();
     path.moveTo(size.width, d);
     path.lineTo(size.width, 0);
@@ -153,7 +153,7 @@ class BackgroundPainter extends CustomPainter {
       Point(6 * x, d - y),
       Point(7 * x, d + y),
       Point(8 * x, d - y),
-      Point(size.width, d),
+      Point(size.width+x, d),
     ]);
     canvas.drawPath(path, fifthPaint);
   }

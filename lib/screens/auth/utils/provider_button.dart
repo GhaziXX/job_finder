@@ -33,29 +33,6 @@ class _ProviderButtonState extends State<ProviderButton> {
             ),
           ),
         );
-
-        break;
-      case "twitter":
-        return InkWell(
-          onTap: () => context.signInWithTwitter(),
-          child: Container(
-            padding: const EdgeInsets.all(8.0),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.black26,
-              ),
-            ),
-            child: Transform.scale(
-              scale: 1.2,
-              child: LitAuthIcon.twitter(
-                size: const Size(30, 30),
-              ),
-            ),
-          ),
-        );
-        break;
       default:
         return const Text("error");
     }
