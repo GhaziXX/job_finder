@@ -96,7 +96,7 @@ class _OffersState extends State<Offers> {
     getName(databaseReference, uid);
     getTags(databaseReference, uid);
     getNameFromShared();
-    print('this name is $nameFromShared');
+   //print('this name is $nameFromShared');
     if (nameFromShared != 'None' &&
         nameFromShared != null &&
         nameFromShared != "") name = nameFromShared;

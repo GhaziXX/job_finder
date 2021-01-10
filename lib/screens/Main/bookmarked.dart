@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:job_finder/models/compay.dart';
@@ -7,7 +9,7 @@ import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 // ignore: must_be_immutable
 class BookmarkedPage extends StatefulWidget {
-  List<Company> faves = new List();
+   List<Company> faves = new List();
 
   BookmarkedPage({Key key, this.faves}) : super(key: key);
 
@@ -18,10 +20,12 @@ class BookmarkedPage extends StatefulWidget {
   @override
   _BookmarkedPageState createState() => _BookmarkedPageState();
 }
-Future<List<Company>> futureFavouriteBooks;
+Future <Company> futureFavouriteBooks;
 
 class _BookmarkedPageState extends State<BookmarkedPage> {
   static List<String> books = new List();
+
+
 
   @override
   void initState() {
@@ -29,14 +33,72 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
     final databaseReference =
     FirebaseFirestore.instance.collection("users_data");
     final litUser = context.getSignedInUser();
+
     String uid = "";
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getBooks(databaseReference, uid);
-    futureFavouriteBooks = getFaveBooks();
-
+    var id = books[0];
+    print(books[0]);
+    futureFavouriteBooks = fetchOfferById(id:books[0]);
   }
 
 
+
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    final databaseReference =
+    FirebaseFirestore.instance.collection("users_data");
+    final litUser = context.getSignedInUser();
+    String uid = "";
+    litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
+    getBooks(databaseReference, uid);
+
+    return Scaffold(
+      backgroundColor: Colors.white10,
+      body:Column(
+        children:[ Container(
+          child :
+            FutureBuilder<Company>(
+                future: futureFavouriteBooks,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+
+                    return ListView.builder(
+                      itemCount: books.length,
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        var recent = snapshot.data;
+                        return InkWell(
+
+                          child: RecentJobCard(company: recent),
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  return Center(
+                      child: SizedBox(
+                          height: 50,
+                          width: 50,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 1,
+                          )));
+                }),
+
+        ),
+    ]
+      ),
+    );
+  }
   void getBooks(CollectionReference f, String uid) async {
     await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
@@ -46,54 +108,14 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
         if (da['uid'] == uid) {
           da['bookmarked'].forEach((element) {
             temp.add(element);
+            print(element);
           });
         }
       });
       books = temp;
+
+
     });
   }
-
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    final databaseReference =
-    FirebaseFirestore.instance.collection("users_data");
-    final litUser = context.getSignedInUser();
-    String uid = "";
-    litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
-    getBooks(databaseReference, uid);
-    return new Scaffold(
-      backgroundColor: Colors.white10,
-      body: Column(
-          children :[ FutureBuilder<List<Company>>(
-              future: futureFavouriteBooks,
-              builder: (context, snapshot) {
-
-                return StatefulBuilder(builder:
-                    (BuildContext context,
-                    StateSetter setState) {
-                  return ListView.builder(
-                      itemCount: snapshot.data.length,
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      physics: ScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        var recent = snapshot.data[index];
-                        return InkWell(
-
-                          child: RecentJobCard(
-                              company: recent,couleur: Colors.red),
-                        );
-                      });
-                });
-
-              })
-          ]
-      ),
-    );
-  }
-
 
 }

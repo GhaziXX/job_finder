@@ -20,14 +20,7 @@ class RecentJobCard extends StatefulWidget {
   @override
   _RecentJobCardState createState() => _RecentJobCardState();
 }
-List<Company> fetchFaveBooks() {
-  return RecentJobCard.faves;
-}
 
-Future <List<Company>> getFaveBooks() async {
-  List<Company> booksList = fetchFaveBooks();
-  return booksList;
-}
 class _RecentJobCardState extends State<RecentJobCard> {
   bool isPressed = false;
 
@@ -66,7 +59,7 @@ class _RecentJobCardState extends State<RecentJobCard> {
                 ),
                 trailing: IconButton(
                     icon: Icon(Icons.favorite),
-                    color: widget.couleur,
+                    color: isPressed ? Colors.red : null,
 
                     onPressed:  () {
 
