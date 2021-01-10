@@ -12,8 +12,16 @@ class CompanyCard extends StatelessWidget {
       margin: EdgeInsets.only(right: 15.0),
       padding: EdgeInsets.all(15.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(10.0),
         color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey[100],
+            spreadRadius: 2,
+            blurRadius: 2,
+            offset: Offset(2, 2), // changes position of shadow
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

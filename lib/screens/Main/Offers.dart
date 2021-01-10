@@ -23,7 +23,7 @@ Future<List<Company>> futureRecentOffer;
 
 class _OffersState extends State<Offers> {
   static String name = "";
-  static String stags = "Python";
+  static String stags = "";
   static String oneTimeTags = "";
   static String nameFromShared = null;
   TextEditingController myText; //Search text input
@@ -104,7 +104,7 @@ class _OffersState extends State<Offers> {
       oneTimeTags = stags;
     }
     return Scaffold(
-      backgroundColor:Colors.white10,
+      backgroundColor:Colors.grey[100],
       body: Container(
         margin: EdgeInsets.only(left: 18.0),
         child: SingleChildScrollView(
@@ -115,7 +115,7 @@ class _OffersState extends State<Offers> {
               Padding(
                 padding: EdgeInsets.only(right: 32, top: 60, bottom: 3),
                 child: Text(
-                  "Welcome $name",
+                  "Welcome\n$name",
                   style: kPageTitleStyle,
                 ),
               ),
@@ -273,27 +273,6 @@ class _OffersState extends State<Offers> {
                                             ),
                                             border: InputBorder.none,
                                             hintText: "Location",
-                                            hintStyle: kSubtitleStyle.copyWith(
-                                              color: Palette.navyBlue,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 25.0),
-                                        child: TextField(
-                                          controller:
-                                              myDescription, //to get the info in myText : myText.text
-                                          cursorColor: Colors.black,
-                                          decoration: InputDecoration(
-                                            icon: Icon(
-                                              Icons.business_center,
-                                              size: 25.0,
-                                              color: Colors.black,
-                                            ),
-                                            border: InputBorder.none,
-                                            hintText: "Job Description",
                                             hintStyle: kSubtitleStyle.copyWith(
                                               color: Palette.navyBlue,
                                             ),

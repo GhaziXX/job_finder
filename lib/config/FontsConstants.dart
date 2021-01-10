@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:job_finder/config/Palette.dart';
 
 const kPageTitleStyle = TextStyle(
-    fontSize: 50.0,
+    fontSize: 30.0,
     fontWeight: FontWeight.bold,
     color: Palette.navyBlue,
     wordSpacing: 2.5
