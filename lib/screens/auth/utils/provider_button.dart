@@ -15,8 +15,6 @@ class ProviderButton extends StatefulWidget {
 class _ProviderButtonState extends State<ProviderButton> {
   @override
   Widget build(BuildContext context) {
-    switch (widget.signInType) {
-      case "google":
         return InkWell(
           onTap: () => context.signInWithGoogle(),
           child: Container(
@@ -33,8 +31,5 @@ class _ProviderButtonState extends State<ProviderButton> {
             ),
           ),
         );
-      default:
-        return const Text("error");
-    }
   }
 }

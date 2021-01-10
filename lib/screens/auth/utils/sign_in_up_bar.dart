@@ -125,7 +125,7 @@ class _RoundContinueButton extends StatelessWidget {
       child: const Icon(
         FontAwesomeIcons.longArrowAltRight,
         color: Colors.white,
-        size: 24.0,
+        size: 22.0,
       ),
     );
   }

@@ -53,8 +53,7 @@ class MyApp extends StatelessWidget {
                   return LitAuthInit(
                     authProviders: const AuthProviders(
                         emailAndPassword: true, // enabled by default
-                        google: true,
-                        twitter: true),
+                        google: true),
                     child: MaterialApp(
                         title: 'Jobby',
                         debugShowCheckedModeBanner: false,

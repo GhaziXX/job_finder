@@ -36,34 +36,23 @@ class Register extends StatelessWidget {
             Expanded(
               flex: 5,
               child: ListView(
+                //physics: NeverScrollableScrollPhysics(),
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 9),
                     child: TextFormField(
                         controller: fullname,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
-                        ),
                         decoration:
                             registerInputDecoration(hintText: 'Full Name')),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 9),
                     child: EmailTextFormField(
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
-                        ),
                         decoration: registerInputDecoration(hintText: 'Email')),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 9),
                     child: PasswordTextFormField(
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.black54,
-                      ),
                       decoration: registerInputDecoration(hintText: 'Password'),
                     ),
                   ),

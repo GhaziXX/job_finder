@@ -104,7 +104,7 @@ class _OffersState extends State<Offers> {
       oneTimeTags = stags;
     }
     return Scaffold(
-      backgroundColor:Colors.grey[100],
+      backgroundColor: Colors.grey[100],
       body: Container(
         margin: EdgeInsets.only(left: 18.0),
         child: SingleChildScrollView(

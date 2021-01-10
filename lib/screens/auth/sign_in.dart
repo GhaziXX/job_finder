@@ -23,7 +23,7 @@ class SignIn extends StatelessWidget {
         child: Column(
           children: [
             const Expanded(
-              flex: 3,
+              flex: 8,
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: LoginTitle(
@@ -32,8 +32,9 @@ class SignIn extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 5,
+              flex: 18,
               child: ListView(
+                physics : NeverScrollableScrollPhysics(),
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -54,6 +55,32 @@ class SignIn extends StatelessWidget {
                       context.signInWithEmailAndPassword();
                     },
                   ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Column(
+                      children: [
+                        const Text(
+                          "or sign in with",
+                          style: TextStyle(
+                            color: Colors.black54,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 24.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ProviderButton(
+                              context: context,
+                              signInType: "google",
+                            ),
+                          ],
+                        ),
+                        //Spacer(),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
@@ -63,28 +90,6 @@ class SignIn extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   children: [
-                    const Text(
-                      "or sign in with",
-                      style: TextStyle(
-                        color: Colors.black54,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 24.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ProviderButton(
-                          context: context,
-                          signInType: "google",
-                        ),
-                        ProviderButton(
-                          context: context,
-                          signInType: "twitter",
-                        ),
-                      ],
-                    ),
                     Spacer(),
                     InkWell(
                         splashColor: Colors.white,
