@@ -21,6 +21,8 @@ class SettingsOnePage extends StatefulWidget {
 }
 
 class _SettingsOnePageState extends State<SettingsOnePage> {
+  static String name = "";
+
   final myName = TextEditingController();
   static String newName;
   bool _dark;
@@ -35,14 +37,27 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
     return _dark ? Brightness.dark : Brightness.light;
   }
 
-
-    @override
-    Widget build(BuildContext context) {
-      final databaseReference =
-      FirebaseFirestore.instance.collection("users_data");
-      final litUser = context.getSignedInUser();
-      String uid = "";
-      litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
+  void getName(CollectionReference f, String uid) async {
+    await f.get().then((QuerySnapshot snapshot) {
+      List<QueryDocumentSnapshot> d = snapshot.docs;
+      d.forEach((element) {
+        Map<String, dynamic> da = element.data();
+        if (da['uid'] == uid) {
+          setState(() {
+            name = da['name'].toString();
+          });
+        }
+      });
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    final databaseReference =
+    FirebaseFirestore.instance.collection("users_data");
+    final litUser = context.getSignedInUser();
+    String uid = "";
+    litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
+    getName(databaseReference, uid);
 
     return Theme(
       isMaterialAppTheme: true,
@@ -79,54 +94,56 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                     color: Palette.navyBlue,
                     child: ListTile(
                       onTap: () {
-                        showMaterialModalBottomSheet(
+                        showDialog(
                             context: context,
-                            builder: (BuildContext context) {
-                              return StatefulBuilder(builder:
-                                  (BuildContext context, StateSetter setState) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: Container(
-                                    height : 300.0,
-                                    child: Column(children: [
-                                      Text('Settings',
-                                        style: TextStyle(
-                                          fontSize: 25.0,
-                                        ),),
-                                      SizedBox(height : 30),
-                                      TextField(
-                                        controller: myName,
-                                        //to get the info in myText : myText.text
+                            builder: (BuildContext context) =>
 
-                                        cursorColor: Colors.black,
-                                        decoration: InputDecoration(
+                                AlertDialog(
+                                  content: Padding(
+                                    padding: const EdgeInsets.all(30.0),
+                                    child: Container(
+                                      height : 300.0,
+                                      child: Column(children: [
+                                        Text('Settings',
+                                          style: TextStyle(
+                                            fontSize: 25.0,
+                                          ),),
+                                        SizedBox(height : 30),
+                                        TextField(
+                                          controller: myName,
+                                          //to get the info in myText : myText.text
 
-                                          border: InputBorder.none,
-                                          hintText: "Enter your new name",
-                                          hintStyle: kSubtitleStyle.copyWith(
-                                            color: Palette.navyBlue,
+                                          cursorColor: Colors.black,
+                                          decoration: InputDecoration(
+
+                                            border: InputBorder.none,
+                                            hintText: "Enter your new name",
+                                            hintStyle: kSubtitleStyle.copyWith(
+                                              color: Palette.navyBlue,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 30.0,
-                                      ),
-                                      RaisedButton(
-                                          child: Text('Save'),
-                                          onPressed: () {
-                                            setState(() {
-                                              newName = myName.text;
-                                              setData(databaseReference, uid, newName);
-                                            });
-                                          })
-                                    ]),
+                                        SizedBox(
+                                          height: 30.0,
+                                        ),
+                                        RaisedButton(
+                                            child: Text('Save'),
+                                            onPressed: () {
+                                              setState(() {
+                                                newName = myName.text;
+                                                setData(databaseReference, uid, newName);
+                                              });
+                                            })
+                                      ]),
+                                    ),
                                   ),
-                                );
-                              });
-                            });
+
+                                ));
+
+
                       },
                       title: Text(
-                        "UserName",
+                        "$name",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
@@ -174,8 +191,8 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                         _buildDivider(),
                         ListTile(
                           leading: Icon(
-                            Icons.location_on,
-                            color: Palette.navyBlue
+                              Icons.location_on,
+                              color: Palette.navyBlue
                           ),
                           title: Text("Change Location"),
                           trailing: Icon(Icons.keyboard_arrow_right),
