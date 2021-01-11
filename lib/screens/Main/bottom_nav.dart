@@ -6,6 +6,7 @@ import 'package:job_finder/screens/Main/Offers.dart';
 import 'package:job_finder/screens/Main/application.dart';
 import 'package:job_finder/screens/Main/bookmarked.dart';
 import 'package:job_finder/screens/Main/settings.dart';
+import 'package:job_finder/screens/Main/settings_new.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 class BottomNav extends StatefulWidget {
@@ -20,7 +21,7 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   List<StatefulWidget> _widgetOptions = [
-    SettingsPage(),
+    SettingsOnePage(),
     Offers(),
     ApplicationPage(),
     BookmarkedPage(),

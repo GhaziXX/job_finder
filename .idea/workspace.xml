@@ -10,22 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f59acc18-e86e-4216-94fa-7c2c39194fc3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/screens/Main/settings_new.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/compay.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/compay.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/Main/bookmarked.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/bookmarked.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/recent_job_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/recent_job_card.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/Main/bottom_nav.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/bottom_nav.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DEQKNRAU7SIJZPPZ]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="RF8N11E26KM" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -45,7 +44,7 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ayoub_derien" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -73,43 +72,59 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="389" y="182" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1280.689@0.0.1280.689" timestamp="1610307396063" />
-    <state x="449" y="102" key="FileChooserDialogImpl" timestamp="1610321175387">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="421" y="97" key="FileChooserDialogImpl" timestamp="1610369770818">
+      <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1609767496154" />
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1610369770818" />
     <state x="449" y="102" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1610321175387" />
-    <state width="1323" height="141" key="GridCell.Tab.0.bottom" timestamp="1610325101151">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1236" height="2" key="GridCell.Tab.0.bottom" timestamp="1610375708425">
+      <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state width="1236" height="2" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1609767530934" />
-    <state width="1236" height="2" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1610320894597" />
+    <state width="1236" height="2" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1610375708425" />
     <state width="1323" height="141" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610325101151" />
-    <state width="1323" height="141" key="GridCell.Tab.0.center" timestamp="1610325101151">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1236" height="2" key="GridCell.Tab.0.center" timestamp="1610375708424">
+      <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state width="1236" height="2" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1609767530934" />
-    <state width="1236" height="2" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1610320894597" />
+    <state width="1236" height="2" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1610375708424" />
     <state width="1323" height="141" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1610325101151" />
-    <state width="1323" height="141" key="GridCell.Tab.0.left" timestamp="1610325101151">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1236" height="2" key="GridCell.Tab.0.left" timestamp="1610375708423">
+      <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state width="1236" height="2" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1609767530933" />
-    <state width="1236" height="2" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1610320894596" />
+    <state width="1236" height="2" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1610375708423" />
     <state width="1323" height="141" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1610325101151" />
-    <state width="1323" height="141" key="GridCell.Tab.0.right" timestamp="1610325101151">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1236" height="2" key="GridCell.Tab.0.right" timestamp="1610375708425">
+      <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state width="1236" height="2" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1609767530934" />
-    <state width="1236" height="2" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610320894597" />
+    <state width="1236" height="2" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610375708425" />
     <state width="1323" height="141" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1610325101151" />
     <state x="152" y="0" key="SettingsEditor" timestamp="1610321257292">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1607454951535" />
     <state x="152" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1610321257292" />
+    <state x="123" y="97" width="1035" height="645" key="dock-window-1" timestamp="1610370154381">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="123" y="97" width="1035" height="645" key="dock-window-1/0.0.1280.689@0.0.1280.689" timestamp="1610370154381" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1609452087670">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1609452087670" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/Main/settings.dart</url>
+          <line>2</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
