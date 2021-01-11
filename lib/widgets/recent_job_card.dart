@@ -83,7 +83,6 @@ class _RecentJobCardState extends State<RecentJobCard> {
 
                         getData(
                             databaseReference, uid, RecentJobCard.identifier);
-                        print(RecentJobCard.faves);
                       });
                       return InkWell(
                         onTap: () {
