@@ -79,7 +79,51 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                     color: Palette.navyBlue,
                     child: ListTile(
                       onTap: () {
-                        //open edit profile
+                        showMaterialModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return StatefulBuilder(builder:
+                                  (BuildContext context, StateSetter setState) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(30.0),
+                                  child: Container(
+                                    height : 300.0,
+                                    child: Column(children: [
+                                      Text('Settings',
+                                        style: TextStyle(
+                                          fontSize: 25.0,
+                                        ),),
+                                      SizedBox(height : 30),
+                                      TextField(
+                                        controller: myName,
+                                        //to get the info in myText : myText.text
+
+                                        cursorColor: Colors.black,
+                                        decoration: InputDecoration(
+
+                                          border: InputBorder.none,
+                                          hintText: "Enter your new name",
+                                          hintStyle: kSubtitleStyle.copyWith(
+                                            color: Palette.navyBlue,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 30.0,
+                                      ),
+                                      RaisedButton(
+                                          child: Text('Save'),
+                                          onPressed: () {
+                                            setState(() {
+                                              newName = myName.text;
+                                              setData(databaseReference, uid, newName);
+                                            });
+                                          })
+                                    ]),
+                                  ),
+                                );
+                              });
+                            });
                       },
                       title: Text(
                         "UserName",
@@ -110,51 +154,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                           ),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
-                            showMaterialModalBottomSheet(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return StatefulBuilder(builder:
-                                      (BuildContext context, StateSetter setState) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(30.0),
-                                      child: Container(
-                                        height : 300.0,
-                                        child: Column(children: [
-                                          Text('Settings',
-                                            style: TextStyle(
-                                              fontSize: 25.0,
-                                            ),),
-                                          SizedBox(height : 30),
-                                          TextField(
-                                            controller: myName,
-                                            //to get the info in myText : myText.text
 
-                                            cursorColor: Colors.black,
-                                            decoration: InputDecoration(
-
-                                              border: InputBorder.none,
-                                              hintText: "Enter your new name",
-                                              hintStyle: kSubtitleStyle.copyWith(
-                                                color: Palette.navyBlue,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 30.0,
-                                          ),
-                                          RaisedButton(
-                                              child: Text('Save'),
-                                              onPressed: () {
-                                                setState(() {
-                                                  newName = myName.text;
-                                                  setData(databaseReference, uid, newName);
-                                                });
-                                              })
-                                        ]),
-                                      ),
-                                    );
-                                  });
-                                });
                           },
                           title: Text("Change Tags"),
 
