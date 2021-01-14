@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:job_finder/models/compay.dart';
 
@@ -43,8 +44,6 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
         FutureBuilder<dynamic>(
             future: fetchOfferById(ids: books),
             builder: (context, snapshot) {
-              return StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setState) {
                 if (snapshot.hasData) {
                   return ListView.builder(
                     itemCount: books.length,
@@ -62,13 +61,19 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
                   return Text("${snapshot.error}");
                 }
                 return Center(
-                    child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1,
-                        )));
-              });
+                  child: Column(
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height* 0.45),
+                      SizedBox(
+                          height: 50,
+                          width: 50,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 1,
+                          )),
+                    ],
+                  ),
+                );
+
             }),
       ]),
     );
@@ -88,6 +93,5 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
       });
     });
     books = temp;
-    print(books);
   }
 }

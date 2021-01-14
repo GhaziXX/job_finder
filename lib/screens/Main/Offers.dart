@@ -241,28 +241,21 @@ class _OffersState extends State<Offers> {
                       child: FlatButton(
                         //filter
                         onPressed: () {
-                          showMaterialModalBottomSheet(
+                          showDialog(
                               context: context,
                               builder: (BuildContext context) {
-                                return StatefulBuilder(builder:
-                                    (BuildContext context,
-                                        StateSetter setState) {
-                                  return SingleChildScrollView(
-                                    child: Column(children: [
-                                      SizedBox(height: 20),
-                                      Text(
-                                        'Filters',
-                                        style: TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(height: 20),
+                                return new AlertDialog(
+                                  title: Center(child: const Text('Filters',style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold))),
+                                  content: new Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 25.0),
+                                            horizontal: 20.0),
                                         child: TextField(
                                           controller:
-                                              myLocation, //to get the info in myText : myText.text
+                                          myLocation, //to get the info in myText : myText.text
                                           cursorColor: Colors.black,
                                           decoration: InputDecoration(
                                             icon: Icon(
@@ -280,7 +273,7 @@ class _OffersState extends State<Offers> {
                                       ),
                                       Row(
                                         children: [
-                                          SizedBox(width: 15),
+                                          //SizedBox(width: 15),
                                           Checkbox(
                                             value: checked,
                                             onChanged: (bool value) {
@@ -294,9 +287,18 @@ class _OffersState extends State<Offers> {
                                           Text('Full-Time Job'),
                                         ],
                                       ),
-                                    ]),
-                                  );
-                                });
+                                    ],
+                                  ),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      textColor: Theme.of(context).primaryColor,
+                                      child: const Text('Set'),
+                                    ),
+                                  ],
+                                );
                               });
                         },
                         child: Icon(
