@@ -12,8 +12,8 @@ import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 class BottomNav extends StatefulWidget {
   const BottomNav({Key key}) : super(key: key);
   static MaterialPageRoute get route => MaterialPageRoute(
-    builder: (context) => const BottomNav(),
-  );
+        builder: (context) => const BottomNav(),
+      );
 
   @override
   _BottomNavState createState() => _BottomNavState();
@@ -30,7 +30,7 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     final databaseReference =
-    FirebaseFirestore.instance.collection("users_data");
+        FirebaseFirestore.instance.collection("users_data");
     final litUser = context.getSignedInUser();
     String uid = "";
     String name = "";

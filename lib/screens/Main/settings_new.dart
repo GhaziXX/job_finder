@@ -1,17 +1,9 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:job_finder/config/FontsConstants.dart';
 import 'package:job_finder/config/Palette.dart';
-import 'package:job_finder/screens/auth/auth.dart';
+import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:job_finder/widgets/Tags.dart';
-
-
+import 'package:job_finder/screens/Main/maps.dart';
 
 class SettingsOnePage extends StatefulWidget {
   static final String path = "lib/src/pages/settings/settings1.dart";
@@ -22,19 +14,13 @@ class SettingsOnePage extends StatefulWidget {
 
 class _SettingsOnePageState extends State<SettingsOnePage> {
   static String name = "";
-
-  final myName = TextEditingController();
-  static String newName;
   bool _dark;
-  bool _isSelected = false;
+  bool _isOffers = true;
+  bool _isUpdates = true;
   @override
   void initState() {
     super.initState();
     _dark = false;
-  }
-
-  Brightness _getBrightness() {
-    return _dark ? Brightness.dark : Brightness.light;
   }
 
   void getName(CollectionReference f, String uid) async {
@@ -50,220 +36,139 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final databaseReference =
-    FirebaseFirestore.instance.collection("users_data");
+        FirebaseFirestore.instance.collection("users_data");
     final litUser = context.getSignedInUser();
     String uid = "";
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getName(databaseReference, uid);
 
-    return Theme(
-      isMaterialAppTheme: true,
-      data: ThemeData(
-        brightness: _getBrightness(),
+    return Scaffold(
+      backgroundColor: _dark ? null : Colors.grey[100],
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: <Widget>[],
       ),
-      child: Scaffold(
-        backgroundColor: _dark ? null : Colors.grey[100],
-        appBar: AppBar(
-          elevation: 0,
-          brightness: _getBrightness(),
-          iconTheme: IconThemeData(color: _dark ? Colors.white : Colors.black),
-          backgroundColor: Colors.transparent,
-          title: Text(
-            'Settings',
-            style: TextStyle(color: _dark ? Colors.white : Colors.black),
-          ),
-          actions: <Widget>[
-
-          ],
-        ),
-        body: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Card(
-                    elevation: 8.0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    color: Palette.navyBlue,
-                    child: ListTile(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) =>
-
-                                AlertDialog(
-                                  content: Padding(
-                                    padding: const EdgeInsets.all(30.0),
-                                    child: Container(
-                                      height : 300.0,
-                                      child: Column(children: [
-                                        Text('Settings',
-                                          style: TextStyle(
-                                            fontSize: 25.0,
-                                          ),),
-                                        SizedBox(height : 30),
-                                        TextField(
-                                          controller: myName,
-                                          //to get the info in myText : myText.text
-
-                                          cursorColor: Colors.black,
-                                          decoration: InputDecoration(
-
-                                            border: InputBorder.none,
-                                            hintText: "Enter your new name",
-                                            hintStyle: kSubtitleStyle.copyWith(
-                                              color: Palette.navyBlue,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 30.0,
-                                        ),
-                                        RaisedButton(
-                                            child: Text('Save'),
-                                            onPressed: () {
-                                              setState(() {
-                                                newName = myName.text;
-                                                setData(databaseReference, uid, newName);
-                                              });
-                                            })
-                                      ]),
-                                    ),
-                                  ),
-
-                                ));
-
-
-                      },
-                      title: Text(
-                        "$name",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-
-                      trailing: Icon(
-                        Icons.edit,
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Card(
+                  elevation: 8.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  color: Palette.navyBlue,
+                  child: ListTile(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              _namePopup(context, uid, databaseReference));
+                    },
+                    title: Text(
+                      "$name",
+                      style: TextStyle(
                         color: Colors.white,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
+                    leading: CircleAvatar(
+                      child: Image.asset('assets/Images/profile.png'),
+                    ),
+                    trailing: Icon(
+                      Icons.edit,
+                      color: Colors.white,
+                    ),
                   ),
-                  const SizedBox(height: 10.0),
-                  Card(
-                    elevation: 4.0,
-                    margin: const EdgeInsets.fromLTRB(32.0, 8.0, 32.0, 16.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Column(
-                      children: <Widget>[
-                        ListTile(
-                          leading: Icon(
-                            Icons.business_center,
-                            color: Palette.navyBlue,
-                          ),
-                          trailing: Icon(Icons.keyboard_arrow_right),
-                          onTap: () {
-
-                          },
-                          title: Text("Change Tags"),
-
+                ),
+                const SizedBox(height: 10.0),
+                Card(
+                  elevation: 4.0,
+                  margin: const EdgeInsets.fromLTRB(32.0, 8.0, 32.0, 16.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        leading: Icon(
+                          Icons.business_center,
+                          color: Palette.navyBlue,
                         ),
-                        _buildDivider(),
-                        ListTile(
-                          leading: Icon(
-                            Icons.language,
-                            color: Palette.navyBlue,
-                          ),
-                          title: Text("Change Language"),
-                          trailing: Icon(Icons.keyboard_arrow_right),
-                          onTap: () {
-                            //open change language
-                          },
-                        ),
-                        _buildDivider(),
-                        ListTile(
-                          leading: Icon(
-                              Icons.location_on,
-                              color: Palette.navyBlue
-                          ),
+                        trailing: Icon(Icons.keyboard_arrow_right),
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  _tagsPopup(context, uid, databaseReference));
+                        },
+                        title: Text("Change Tags"),
+                      ),
+                      _buildDivider(),
+                      ListTile(
+                          leading:
+                              Icon(Icons.location_on, color: Palette.navyBlue),
                           title: Text("Change Location"),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
-                            //open change location
-                          },
-                        ),
-                      ],
-                    ),
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LocationView()));
+                          }),
+                    ],
                   ),
-                  const SizedBox(height: 20.0),
-                  Text(
-                    "Notification Settings",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.indigo,
-                    ),
+                ),
+                const SizedBox(height: 20.0),
+                Text(
+                  "Notification Settings",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.indigo,
                   ),
-                  SwitchListTile(
-                    activeColor: Palette.navyBlue,
-                    contentPadding: const EdgeInsets.all(0),
-                    title: Text("Receive notification"),
-                    value: _isSelected,
-                    onChanged: (bool newValue) {
-                      setState(() {
-                        _isSelected = newValue;
-                      });
-                    },
-                  ),
-
-                  SwitchListTile(
-                    activeColor: Palette.navyBlue,
-                    contentPadding: const EdgeInsets.all(0),
-                    title: Text("Receive Offer Notification"),
-                    value: _isSelected,
-                    onChanged: (bool newValue) {
-                      setState(() {
-                        _isSelected = newValue;
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    activeColor: Palette.navyBlue,
-                    contentPadding: const EdgeInsets.all(0),
-                    title: Text("Receive App Updates"),
-                    value: _isSelected,
-                    onChanged: (bool newValue) {
-                      setState(() {
-                        _isSelected = newValue;
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    activeColor: Palette.navyBlue,
-                    contentPadding: const EdgeInsets.all(0),
-                    title: Text("Log out"),
-                    value: _isSelected,
-                    onChanged: (bool newValue) {
-                      setState(() {
-                        _isSelected = newValue;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 60.0),
-                ],
-              ),
+                ),
+                SwitchListTile(
+                  activeColor: Palette.navyBlue,
+                  contentPadding: const EdgeInsets.all(0),
+                  title: Text("Receive Offers notifications"),
+                  value: _isOffers,
+                  onChanged: (bool newValue) {
+                    setState(() {
+                      _isOffers = newValue;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  activeColor: Palette.navyBlue,
+                  contentPadding: const EdgeInsets.all(0),
+                  title: Text("Receive App Updates"),
+                  value: _isUpdates,
+                  onChanged: (bool newValue) {
+                    setState(() {
+                      _isUpdates = newValue;
+                    });
+                  },
+                ),
+                ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  title: Text("Log out"),
+                  onTap: () {
+                    context.signOut();
+                  },
+                ),
+                const SizedBox(height: 60.0),
+              ],
             ),
-
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -278,7 +183,100 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
       color: Colors.grey.shade400,
     );
   }
+
+  Widget _namePopup(
+      BuildContext context, String uid, CollectionReference databaseReference) {
+    final myName = TextEditingController();
+    String newName;
+    return new AlertDialog(
+      title: const Text('Change Name'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextField(
+            controller: myName,
+            decoration: registerInputDecoration(hintText: 'Enter New Name'),
+          )
+        ],
+      ),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Close'),
+        ),
+        FlatButton(
+          onPressed: () {
+            setState(() {
+              newName = myName.text;
+              setData(databaseReference, uid, newName);
+            });
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Save'),
+        ),
+      ],
+    );
+  }
+
+  Widget _tagsPopup(
+      BuildContext context, String uid, CollectionReference databaseReference) {
+    final myTag = TextEditingController();
+    String newTag;
+    return new AlertDialog(
+      title: const Text('Change Tags'),
+      content: new Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: TextField(
+                controller: myTag,
+                decoration: registerInputDecoration(hintText: 'Enter New Tag'),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              child: FlatButton(
+                onPressed: () {
+                  print("hna add tag");
+                },
+                textColor: Theme.of(context).primaryColor,
+                child: const Text('Add'),
+              ),
+            ),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Close'),
+        ),
+        FlatButton(
+          onPressed: () {
+            setState(() {
+              print("hna zid el fonction ta3 l'ajout");
+            });
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Save'),
+        ),
+      ],
+    );
+  }
 }
+
 void updateData(CollectionReference f, String id, String name) {
   try {
     f.doc(id).update({'name': name});
@@ -286,6 +284,7 @@ void updateData(CollectionReference f, String id, String name) {
     print(e.toString());
   }
 }
+
 void setData(CollectionReference f, String uid, String name) {
   f.get().then((QuerySnapshot snapshot) {
     List<QueryDocumentSnapshot> d = snapshot.docs;

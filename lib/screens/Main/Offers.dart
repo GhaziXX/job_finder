@@ -25,7 +25,7 @@ class _OffersState extends State<Offers> {
   static String name = "";
   static String stags = "";
   static String oneTimeTags = "";
-  static String nameFromShared = null;
+  static String nameFromShared;
   TextEditingController myText; //Search text input
   TextEditingController myLocation;
   //Location description
