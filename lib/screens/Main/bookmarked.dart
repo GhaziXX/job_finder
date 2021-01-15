@@ -40,42 +40,46 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
     getBooks(databaseReference, uid);
     return Scaffold(
       backgroundColor: Colors.white10,
-      body: Column(children: [
-        FutureBuilder<dynamic>(
-            future: fetchOfferById(ids: books),
-            builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: books.length,
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    physics: ScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      var recent = snapshot.data[index];
-                      return InkWell(
-                        child: RecentJobCard(company: recent),
+      body: Container(
+        child: SingleChildScrollView(
+          child: Column(children: [
+            FutureBuilder<dynamic>(
+                future: fetchOfferById(ids: books),
+                builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: books.length,
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          var recent = snapshot.data[index];
+                          return InkWell(
+                            child: RecentJobCard(company: recent),
+                          );
+                        },
                       );
-                    },
-                  );
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-                return Center(
-                  child: Column(
-                    children: [
-                      SizedBox(height: MediaQuery.of(context).size.height* 0.45),
-                      SizedBox(
-                          height: 50,
-                          width: 50,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 1,
-                          )),
-                    ],
-                  ),
-                );
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    return Center(
+                      child: Column(
+                        children: [
+                          SizedBox(height: MediaQuery.of(context).size.height* 0.45),
+                          SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                              )),
+                        ],
+                      ),
+                    );
 
-            }),
-      ]),
+                }),
+          ]),
+        ),
+      ),
     );
   }
 
