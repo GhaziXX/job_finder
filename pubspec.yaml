@@ -43,6 +43,7 @@ dependencies:
   geocoding: ^1.0.5
   material_floating_search_bar: ^0.2.6
   uuid: ^2.0.4
+  flutter_cache_manager: ^2.1.0
 
 dev_dependencies:
   flutter_test:
