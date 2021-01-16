@@ -42,6 +42,12 @@ class Register extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 9),
                     child: TextFormField(
                         controller: fullname,
+                        // ignore: missing_return
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Please enter a valid name";
+                          }
+                        },
                         decoration:
                             registerInputDecoration(hintText: 'Full Name')),
                   ),
@@ -60,11 +66,14 @@ class Register extends StatelessWidget {
                     label: 'Sign up',
                     isLoading: isSubmitting,
                     onPressed: () async {
-                      context.registerWithEmailAndPassword();
-                      createRecord(databaseReference, fullname.text);
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.setString('name', fullname.text);
+                      if (fullname.text != null) {
+                        createRecord(databaseReference, fullname.text);
+                        context.registerWithEmailAndPassword();
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+
+                        prefs.setString('name', fullname.text);
+                      }
                     },
                   ),
                   Align(
@@ -94,6 +103,6 @@ class Register extends StatelessWidget {
   }
 
   void createRecord(CollectionReference f, String name) async {
-    await f.add({'name': name});
+    await f.add({'name': name, 'bookmarked': [], 'tags': [], 'uid': ''});
   }
 }

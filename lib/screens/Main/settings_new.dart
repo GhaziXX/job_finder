@@ -38,9 +38,9 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
   getSwitchValues() async {
     _isOffers = await getSwitchState();
     _isUpdates = await getSwitchState2();
-    setState(() async {
-      _isOffers = await getSwitchState();
-      _isUpdates = await getSwitchState2();
+    setState(() {
+      //_isOffers = await getSwitchState();
+      //_isUpdates = await getSwitchState2();
     });
   }
 
@@ -313,8 +313,13 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                         children: <Widget>[
                           Expanded(
                             child: Container(
-                              child: TextField(
+                              child: TextFormField(
                                 controller: myTag,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Please enter a valid name";
+                                  }
+                                },
                                 decoration:
                                     InputDecoration(hintText: "Enter New Tag"),
                               ),
@@ -325,9 +330,11 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                               margin: EdgeInsets.all(12.0),
                               child: FlatButton(
                                 onPressed: () {
-                                  setState(() {
-                                    _tags.add(myTag.text);
-                                  });
+                                  if (myTag.text.isNotEmpty) {
+                                    setState(() {
+                                      _tags.add(myTag.text);
+                                    });
+                                  }
                                 },
                                 textColor: Colors.white,
                                 child: const Text('Add'),

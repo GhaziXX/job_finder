@@ -65,31 +65,30 @@ class _BottomNavState extends State<BottomNav> {
         ));
   }
 
-  void createRecord(CollectionReference f, String name, String uid) async {
-    await f.add({'name': name, "uid": uid});
-  }
+  // void createRecord(CollectionReference f, String name, String uid) async {
+  //   await f.add({'name': name, "uid": uid});
+  // }
 
   void getData(CollectionReference f, String uid, String name) {
     f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
       int l = snapshot.docs.length;
-
       for (var i = 0; i < l; i++) {
-        if (d[i].data().length < 2) {
+        if (d[i].data()["uid"] == "") {
           updateData(f, d[i].id, uid);
           break;
         }
       }
-      bool exists = false;
-      for (var i = 0; i < l; i++) {
-        if (d[i].data()["uid"].toString() == uid) {
-          exists = true;
-          break;
-        }
-      }
-      if (!exists && name != null) {
-        createRecord(f, name, uid);
-      }
+      // bool exists = false;
+      // for (var i = 0; i < l; i++) {
+      //   if (d[i].data()["uid"].toString() == uid) {
+      //     exists = true;
+      //     break;
+      //   }
+      // }
+      // if (!exists && name != null) {
+      //   createRecord(f, name, uid);
+      // }
     });
   }
 
