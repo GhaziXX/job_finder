@@ -3,9 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/screens/Main/Offers.dart';
-import 'package:job_finder/screens/Main/application.dart';
 import 'package:job_finder/screens/Main/bookmarked.dart';
-import 'package:job_finder/screens/Main/settings.dart';
 import 'package:job_finder/screens/Main/settings_new.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
@@ -23,7 +21,6 @@ class _BottomNavState extends State<BottomNav> {
   List<StatefulWidget> _widgetOptions = [
     SettingsOnePage(),
     Offers(),
-    ApplicationPage(),
     BookmarkedPage(),
   ];
   int _selectedIndex = 1;
@@ -58,11 +55,6 @@ class _BottomNavState extends State<BottomNav> {
                 icon: Icon(Icons.explore),
                 title: Text("Offers"),
                 activeColor: Palette.starCommandBlue,
-                textAlign: TextAlign.center),
-            BottomNavyBarItem(
-                icon: Icon(Icons.work),
-                title: Text("Applications"),
-                activeColor: Palette.blueGreen,
                 textAlign: TextAlign.center),
             BottomNavyBarItem(
                 icon: Icon(Icons.favorite),

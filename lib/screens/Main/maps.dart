@@ -8,11 +8,7 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 class LocationView extends StatefulWidget {
-  const LocationView({Key key}) : super(key: key);
-
-  static MaterialPageRoute get route => MaterialPageRoute(
-        builder: (context) => const LocationView(),
-      );
+  LocationView({Key key}) : super(key: key);
 
   @override
   _LocationViewState createState() => _LocationViewState();
@@ -25,74 +21,78 @@ class _LocationViewState extends State<LocationView> {
 
   static LatLng _initialPosition;
   static List<Marker> _markers = [];
+  final databaseReference = FirebaseFirestore.instance.collection("users_data");
+  String uid = "";
 
   @override
   void initState() {
     super.initState();
+
+    final litUser = context.getSignedInUser();
+
+    litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getUserLocation();
   }
 
   @override
   Widget build(BuildContext context) {
-    final databaseReference =
-        FirebaseFirestore.instance.collection("users_data");
-    final litUser = context.getSignedInUser();
-    String uid = "";
-    litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        GoogleMap(
-          onMapCreated: onMapCreated,
-          compassEnabled: true,
-          myLocationButtonEnabled: false,
-          myLocationEnabled: true,
-          trafficEnabled: true,
-          initialCameraPosition:
-              CameraPosition(target: _initialPosition, zoom: 10),
-          onTap: handleTap,
-          markers: Set.from(_markers),
-        ),
-        Padding(
-            padding: const EdgeInsets.only(bottom: 160.0, right: 6.0),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: FloatingActionButton(
-                onPressed: () {
-                  getUserLocation();
-                  mapController.animateCamera(CameraUpdate.newCameraPosition(
-                      CameraPosition(
-                          target: LatLng(_initialPosition.latitude,
-                              _initialPosition.longitude),
-                          zoom: 10.0)));
-                },
-                backgroundColor: Palette.navyBlue,
-                materialTapTargetSize: MaterialTapTargetSize.padded,
-                child: const Icon(
-                  Icons.gps_fixed,
-                  size: 24.0,
+      body: Stack(
+        children: <Widget>[
+          GoogleMap(
+            onMapCreated: onMapCreated,
+            compassEnabled: true,
+            myLocationButtonEnabled: false,
+            myLocationEnabled: true,
+            trafficEnabled: true,
+            initialCameraPosition:
+                CameraPosition(target: _initialPosition, zoom: 10),
+            onTap: handleTap,
+            markers: Set.from(_markers),
+          ),
+          Padding(
+              padding: const EdgeInsets.only(bottom: 160.0, right: 6.0),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  heroTag: "1",
+                  onPressed: () {
+                    getUserLocation();
+                    mapController.animateCamera(CameraUpdate.newCameraPosition(
+                        CameraPosition(
+                            target: LatLng(_initialPosition.latitude,
+                                _initialPosition.longitude),
+                            zoom: 10.0)));
+                  },
+                  backgroundColor: Palette.navyBlue,
+                  materialTapTargetSize: MaterialTapTargetSize.padded,
+                  child: const Icon(
+                    Icons.gps_fixed,
+                    size: 24.0,
+                  ),
                 ),
-              ),
-            )),
-        Padding(
-            padding: const EdgeInsets.only(bottom: 100.0, right: 6.0),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: FloatingActionButton(
-                onPressed: () {
-                  savePosition(databaseReference, uid, position);
-                },
-                backgroundColor: Palette.navyBlue,
-                materialTapTargetSize: MaterialTapTargetSize.padded,
-                child: const Icon(
-                  Icons.save_sharp,
-                  size: 24.0,
+              )),
+          Padding(
+              padding: const EdgeInsets.only(bottom: 100.0, right: 6.0),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  heroTag: "2",
+                  onPressed: () {
+                    savePosition(databaseReference, uid, position);
+                  },
+                  backgroundColor: Palette.navyBlue,
+                  materialTapTargetSize: MaterialTapTargetSize.padded,
+                  child: const Icon(
+                    Icons.save_sharp,
+                    size: 24.0,
+                  ),
                 ),
-              ),
-            )),
-        buildFloatingSearchBar(),
-      ],
-    ));
+              )),
+          buildFloatingSearchBar(),
+        ],
+      ),
+    );
   }
 
   handleTap(LatLng tappedPoint) {
@@ -119,8 +119,8 @@ class _LocationViewState extends State<LocationView> {
     getData(f, uid, pos);
   }
 
-  void getData(CollectionReference f, String uid, LatLng pos) {
-    f.get().then((QuerySnapshot snapshot) {
+  void getData(CollectionReference f, String uid, LatLng pos) async {
+    await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
       int l = snapshot.docs.length;
 
@@ -176,6 +176,19 @@ class _LocationViewState extends State<LocationView> {
         });
       },
       transition: CircularFloatingSearchBarTransition(),
+      // leadingActions: [
+      //   FloatingSearchBarAction(
+      //     showIfOpened: false,
+      //     child: CircularButton(
+      //       icon: const Icon(Icons.arrow_back),
+      //       onPressed: () {
+      //         Navigator.pop(context);
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (context) => SettingsOnePage()));
+      //       },
+      //     ),
+      //   ),
+      // ],
       actions: [
         FloatingSearchBarAction(
           showIfOpened: false,

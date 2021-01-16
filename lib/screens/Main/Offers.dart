@@ -34,13 +34,13 @@ class _OffersState extends State<Offers> {
   bool pressAttention = false;
   var items = List<String>();
   bool checked = false;
+  static List<String> books = new List<String>();
+  final databaseReference = FirebaseFirestore.instance.collection("users_data");
+  String uid = "";
   @override
   void initState() {
     super.initState();
-    final databaseReference =
-        FirebaseFirestore.instance.collection("users_data");
     final litUser = context.getSignedInUser();
-    String uid = "";
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getTags(databaseReference, uid);
 
@@ -55,6 +55,23 @@ class _OffersState extends State<Offers> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     nameFromShared = prefs.getString('name');
     prefs.setString('name', "None");
+  }
+
+  Future getBooks() async {
+    List<String> temp = new List();
+    await databaseReference.get().then((QuerySnapshot snapshot) {
+      List<QueryDocumentSnapshot> d = snapshot.docs;
+      d.forEach((element) {
+        Map<String, dynamic> da = element.data();
+        if (da['uid'] == uid) {
+          da['bookmarked'].forEach((element) {
+            temp.add(element);
+          });
+        }
+      });
+    });
+    books = temp;
+    return books;
   }
 
   void getName(CollectionReference f, String uid) async {
@@ -88,14 +105,10 @@ class _OffersState extends State<Offers> {
   }
 
   Widget build(BuildContext context) {
-    final databaseReference =
-        FirebaseFirestore.instance.collection("users_data");
-    final litUser = context.getSignedInUser();
-    String uid = "";
-    litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getName(databaseReference, uid);
     getTags(databaseReference, uid);
     getNameFromShared();
+    getBooks();
     if (nameFromShared != 'None' &&
         nameFromShared != null &&
         nameFromShared != "") name = nameFromShared;
@@ -207,8 +220,13 @@ class _OffersState extends State<Offers> {
                                                               },
                                                               child:
                                                                   RecentJobCard(
-                                                                      company:
-                                                                          recent),
+                                                                company: recent,
+                                                                isBook: books.contains(
+                                                                        recent
+                                                                            .id)
+                                                                    ? true
+                                                                    : false,
+                                                              ),
                                                             );
                                                           }),
                                                     ]),
@@ -245,17 +263,22 @@ class _OffersState extends State<Offers> {
                               context: context,
                               builder: (BuildContext context) {
                                 return new AlertDialog(
-                                  title: Center(child: const Text('Filters',style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold))),
+                                  title: Center(
+                                      child: const Text('Filters',
+                                          style: TextStyle(
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.bold))),
                                   content: new Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 20.0),
                                         child: TextField(
                                           controller:
-                                          myLocation, //to get the info in myText : myText.text
+                                              myLocation, //to get the info in myText : myText.text
                                           cursorColor: Colors.black,
                                           decoration: InputDecoration(
                                             icon: Icon(
@@ -317,7 +340,7 @@ class _OffersState extends State<Offers> {
                   "For you",
                   style: kSectionTitleStyle,
                 ),
-                SizedBox(width: 170.0),
+                Spacer(),
                 Container(
                   child: FlatButton(
                     child: Text("Load More"),
@@ -352,7 +375,11 @@ class _OffersState extends State<Offers> {
                                                 );
                                               },
                                               child: RecentJobCard(
-                                                  company: recent),
+                                                  company: recent,
+                                                  isBook:
+                                                      books.contains(recent.id)
+                                                          ? true
+                                                          : false),
                                             );
                                           });
                                     });
@@ -398,7 +425,11 @@ class _OffersState extends State<Offers> {
                                   ),
                                 );
                               },
-                              child: CompanyCard(company: company),
+                              child: CompanyCard(
+                                company: company,
+                                isBook:
+                                    books.contains(company.id) ? true : false,
+                              ),
                             );
                           },
                         );
@@ -420,7 +451,7 @@ class _OffersState extends State<Offers> {
                   "Recent Jobs",
                   style: kSectionTitleStyle,
                 ),
-                SizedBox(width: 130.0),
+                Spacer(),
                 FlatButton(
                   child: Text("Load More"),
                   onPressed: () {
@@ -453,8 +484,12 @@ class _OffersState extends State<Offers> {
                                                 ),
                                               );
                                             },
-                                            child:
-                                                RecentJobCard(company: recent),
+                                            child: RecentJobCard(
+                                                company: recent,
+                                                isBook:
+                                                    books.contains(recent.id)
+                                                        ? true
+                                                        : false),
                                           );
                                         });
                                   });
@@ -495,7 +530,10 @@ class _OffersState extends State<Offers> {
                                 ),
                               );
                             },
-                            child: RecentJobCard(company: recent),
+                            child: RecentJobCard(
+                              company: recent,
+                              isBook: books.contains(recent.id) ? true : false,
+                            ),
                           );
                         },
                       );

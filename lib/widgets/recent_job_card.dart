@@ -8,18 +8,15 @@ import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 // ignore: must_be_immutable
 class RecentJobCard extends StatefulWidget {
   final Company company;
-  Color couleur;
-  static List<Company> faves = new List<Company>();
-  static Future<List<Company>> faveBooks = List() as Future<List<Company>>;
+  bool isBook = false;
 
-  RecentJobCard({this.company, this.couleur});
+  RecentJobCard({this.company, this.isBook});
 
   @override
   _RecentJobCardState createState() => _RecentJobCardState();
 }
 
 class _RecentJobCardState extends State<RecentJobCard> {
-  bool isPressed = false;
   static List<String> identifier = List();
   @override
   Widget build(BuildContext context) {
@@ -52,20 +49,14 @@ class _RecentJobCardState extends State<RecentJobCard> {
             ),
             trailing: IconButton(
                 icon: Icon(Icons.favorite),
-                color: isPressed ? Colors.red : null,
+                color: widget.isBook ? Colors.red : null,
                 onPressed: () {
                   setState(() {
-                    isPressed = !isPressed;
-
-                    if (isPressed == true) {
-                      widget.couleur = Colors.red;
-                      RecentJobCard.faves.add(widget.company);
+                    widget.isBook = !widget.isBook;
+                    if (widget.isBook == true) {
                       identifier.add(widget.company.id);
                     }
-                    if (isPressed == false) {
-                      widget.couleur = Colors.grey;
-
-                      RecentJobCard.faves.remove(widget.company);
+                    if (widget.isBook == false) {
                       identifier.remove(widget.company.id);
                     }
 
@@ -76,9 +67,7 @@ class _RecentJobCardState extends State<RecentJobCard> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BookmarkedPage(
-                            faves: RecentJobCard.faves,
-                          ),
+                          builder: (context) => BookmarkedPage(),
                         ),
                       );
                     },
