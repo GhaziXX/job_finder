@@ -198,7 +198,7 @@ class _OffersState extends State<Offers> {
                                                               Axis.vertical,
                                                           shrinkWrap: true,
                                                           physics:
-                                                              ScrollPhysics(),
+                                                              BouncingScrollPhysics(),
                                                           itemBuilder:
                                                               (context, index) {
                                                             var recent =
@@ -359,7 +359,7 @@ class _OffersState extends State<Offers> {
                                           itemCount: snapshot.data.length,
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
-                                          physics: ScrollPhysics(),
+                                          physics: BouncingScrollPhysics(),
                                           itemBuilder: (context, index) {
                                             var recent = snapshot.data[index];
                                             return InkWell(
@@ -469,7 +469,7 @@ class _OffersState extends State<Offers> {
                                         itemCount: snapshot.data.length,
                                         scrollDirection: Axis.vertical,
                                         shrinkWrap: true,
-                                        physics: ScrollPhysics(),
+                                        physics: BouncingScrollPhysics(),
                                         itemBuilder: (context, index) {
                                           var recent = snapshot.data[index];
                                           return InkWell(
@@ -516,7 +516,7 @@ class _OffersState extends State<Offers> {
                         itemCount: 5,
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        physics: ScrollPhysics(),
+                        physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           var recent = snapshot.data[index];
                           return InkWell(
