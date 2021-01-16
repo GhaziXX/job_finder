@@ -18,7 +18,7 @@ class Offers extends StatefulWidget {
   _OffersState createState() => _OffersState();
 }
 
-Future<List<Company>> futurePopularOffer;
+Future<List<Company>> futureTaggedOffer;
 Future<List<Company>> futureRecentOffer;
 
 class _OffersState extends State<Offers> {
@@ -44,8 +44,8 @@ class _OffersState extends State<Offers> {
     litUser.when((user) => uid = user.uid, empty: () {}, initializing: () {});
     getTags(databaseReference, uid);
 
-    futurePopularOffer = fetchOffer(tag: oneTimeTags);
-    futureRecentOffer = fetchOffer();
+    //futureTaggedOffer = fetchOfferTagged(tag: oneTimeTags);
+    futureRecentOffer = fetchOfferRecent();
     myText = TextEditingController();
     myLocation = TextEditingController();
     myDescription = TextEditingController(); //description
@@ -115,6 +115,8 @@ class _OffersState extends State<Offers> {
     if (oneTimeTags != stags) {
       oneTimeTags = stags;
     }
+    futureTaggedOffer = fetchOfferTagged(tag: oneTimeTags);
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: Container(
@@ -146,6 +148,7 @@ class _OffersState extends State<Offers> {
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           child: TextField(
+                            textInputAction: TextInputAction.search,
                             controller: myText,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
@@ -160,7 +163,7 @@ class _OffersState extends State<Offers> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return FutureBuilder<List<Company>>(
-                                        future: fetchOffer(
+                                        future: fetchOfferSearch(
                                             tag: myText.text,
                                             location: myLocation.text,
                                             fullTime: checked.toString()),
@@ -349,7 +352,7 @@ class _OffersState extends State<Offers> {
                           context: context,
                           builder: (BuildContext context) {
                             return FutureBuilder<List<Company>>(
-                                future: futurePopularOffer,
+                                future: futureTaggedOffer,
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     return StatefulBuilder(builder:
@@ -404,7 +407,7 @@ class _OffersState extends State<Offers> {
                 width: double.infinity,
                 height: 190.0,
                 child: FutureBuilder<List<Company>>(
-                    future: futurePopularOffer,
+                    future: futureTaggedOffer,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(
@@ -427,8 +430,7 @@ class _OffersState extends State<Offers> {
                               },
                               child: CompanyCard(
                                 company: company,
-                                isBook:
-                                    books.contains(company.id) ? true : false,
+                                isBook : books.contains(company.id) ? true : false,
                               ),
                             );
                           },

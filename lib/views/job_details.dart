@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:job_finder/config/FontsConstants.dart';
 import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/models/compay.dart';
@@ -47,9 +48,7 @@ class JobDetail extends StatelessWidget {
                     Center(child: SizedBox(height:60,width:60, child: Image(image : NetworkImage(company.companyLogo))),),
                     SizedBox(height: 20.0),
                     FittedBox(child: Text(company.title, style: kTitleStyle.copyWith(fontWeight: FontWeight.bold,),),),
-                    SizedBox(height: 15.0),
-                    Text('salary', style: kSubtitleStyle,),
-                    SizedBox(height: 15.0),
+                    SizedBox(height: 20.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [ Container(
@@ -113,7 +112,7 @@ class JobDetail extends StatelessWidget {
                   border: Border.all(color: Colors.black.withOpacity(.5)),
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                child: Icon(Icons.bookmark_border, color: Colors.black,),),
+                child: IconButton(icon : Icon(FontAwesomeIcons.heart), color: Colors.black,),),
               SizedBox(width: 15.0),
               Expanded(
                 child: SizedBox(
