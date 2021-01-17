@@ -9,7 +9,9 @@ import 'package:job_finder/widgets/company_card.dart';
 import 'package:job_finder/widgets/recent_job_card.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:job_finder/screens/main/bottom_nav.dart';
 
 class Offers extends StatefulWidget {
   Offers({Key key}) : super(key: key);
@@ -38,6 +40,7 @@ class _OffersState extends State<Offers> {
   final databaseReference = FirebaseFirestore.instance.collection("users_data");
   String uid = "";
   @override
+
   void initState() {
     super.initState();
     final litUser = context.getSignedInUser();
@@ -103,6 +106,13 @@ class _OffersState extends State<Offers> {
       });
     });
   }
+  Future<void> _deleteCacheDir() async {
+    final cacheDir = await getTemporaryDirectory();
+
+    if (cacheDir.existsSync()) {
+      cacheDir.deleteSync(recursive: true);
+    }
+  }
 
   Widget build(BuildContext context) {
     getName(databaseReference, uid);
@@ -126,26 +136,41 @@ class _OffersState extends State<Offers> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(right: 32, top: 60, bottom: 3),
-                child: Text(
-                  "Welcome\n$name",
-                  style: kPageTitleStyle,
-                ),
-              ),
-              SizedBox(height: 25.0),
-              Container(
-                width: double.infinity,
-                height: 50.0,
-                margin: EdgeInsets.only(right: 18.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 32, top: 60, bottom: 3),
+                    child: Text(
+                      "Welcome\n$name",
+                      style: kPageTitleStyle,
+                    ),
+                  ),
+                  IconButton(
+                    icon:Icon(Icons.refresh),
+                    color: Palette.navyBlue,
+                    onPressed: (){
+                      _deleteCacheDir();
+                      setState(() {
+                        Navigator.push(context, BottomNav.route );
+                      });
+                    })
+                      ],
+                      ),
+                      SizedBox(height: 25.0),
+                      Container(
+                      width: double.infinity,
+                      height: 50.0,
+                      margin: EdgeInsets.only(right: 18.0),
+                      child: Row(
+                      children: <Widget>[
+                      Expanded(
                       child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12.0),
+                      padding: EdgeInsets.symmetric(horizontal: 15.0),
+                      decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.0
+                      ),
                           ),
                           child: TextField(
                             textInputAction: TextInputAction.search,

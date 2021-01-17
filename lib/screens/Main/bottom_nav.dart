@@ -7,6 +7,7 @@ import 'package:job_finder/screens/Main/bookmarked.dart';
 import 'package:job_finder/screens/Main/settings_new.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
+
 class BottomNav extends StatefulWidget {
   const BottomNav({Key key}) : super(key: key);
   static MaterialPageRoute get route => MaterialPageRoute(

@@ -37,13 +37,16 @@ class _LocationViewState extends State<LocationView> {
   @override
   Widget build(BuildContext context) {
     ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
-      return Center(
-          child: SizedBox(
-              height: 50,
-              width: 50,
-              child: CircularProgressIndicator(
-                strokeWidth: 1,
-              )));
+      return Scaffold(
+        backgroundColor: Colors.grey[100],
+        body: Center(
+            child: SizedBox(
+                height: 50,
+                width: 50,
+                child: CircularProgressIndicator(
+                  strokeWidth: 1,
+                ))),
+      );
     };
     return Scaffold(
       backgroundColor: Colors.grey[100],

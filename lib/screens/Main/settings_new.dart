@@ -8,6 +8,7 @@ import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:job_finder/screens/Main/maps.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -96,7 +97,13 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
       });
     });
   }
+  Future<void> _deleteCacheDir() async {
+    final cacheDir = await getTemporaryDirectory();
 
+    if (cacheDir.existsSync()) {
+      cacheDir.deleteSync(recursive: true);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final litUser = context.getSignedInUser();
@@ -230,6 +237,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                     contentPadding: const EdgeInsets.all(0),
                     title: Text("Log out"),
                     onTap: () {
+                      _deleteCacheDir();
                       context.signOut();
                     },
                     trailing: Icon(
@@ -301,8 +309,8 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
     return await showDialog(
         context: context,
         builder: (context) {
+          _deleteCacheDir();
           final myTag = TextEditingController();
-
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
               content: SingleChildScrollView(

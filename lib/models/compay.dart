@@ -83,35 +83,12 @@ Future<List<Company>> fetchOfferSearch({String tag = '', String location = '', S
     throw Exception('Failed to load data');
   }
 }
-Future<List<Company>> fetchOffer({String tag = '', String location = '', String fullTime = '', int page = 0}) async {
-  var response = await get(
-      'https://jobs.github.com/positions.json?description=$tag&location=$location&full_time=$fullTime&page=$page');
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    List jsonResponse = jsonDecode(response.body);
-    return jsonResponse.map((offer) => new Company.fromJson(offer)).toList();
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load data');
-  }
-}
-
-void launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
 Future fetchOfferById({List<String> ids}) async {
   List<Company> b = new List();
 
   for (int i = 0; i < ids.length; i++) {
     var response =
-        await get('https://jobs.github.com/positions/${ids[i]}.json');
+    await get('https://jobs.github.com/positions/${ids[i]}.json');
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
@@ -124,6 +101,14 @@ Future fetchOfferById({List<String> ids}) async {
   }
   //Future<List<Company>> returned = new Future(b);
   return b;
+}
+
+void launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
 
 String removeAllHtmlTags(String htmlText) {
