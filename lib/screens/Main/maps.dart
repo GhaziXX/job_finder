@@ -36,13 +36,15 @@ class _LocationViewState extends State<LocationView> {
 
   @override
   Widget build(BuildContext context) {
-    ErrorWidget.builder = (FlutterErrorDetails errorDetails) { return Center(
-        child: SizedBox(
-            height: 50,
-            width: 50,
-            child: CircularProgressIndicator(
-              strokeWidth: 1,
-            )));};
+    ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+      return Center(
+          child: SizedBox(
+              height: 50,
+              width: 50,
+              child: CircularProgressIndicator(
+                strokeWidth: 1,
+              )));
+    };
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: Stack(
@@ -87,6 +89,24 @@ class _LocationViewState extends State<LocationView> {
                 child: FloatingActionButton(
                   heroTag: "2",
                   onPressed: () {
+                    final snackBar = SnackBar(
+                      content: Row(
+                        children: [
+                          Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 32,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text('Location saved!'),
+                        ],
+                      ),
+                      backgroundColor: Palette.navyBlue,
+                      duration: Duration(seconds: 1),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     savePosition(databaseReference, uid, position);
                   },
                   backgroundColor: Palette.navyBlue,
@@ -155,6 +175,10 @@ class _LocationViewState extends State<LocationView> {
 
     setState(() {
       _initialPosition = LatLng(position.latitude, position.longitude);
+      _markers.add(Marker(
+        markerId: MarkerId(_initialPosition.toString()),
+        position: _initialPosition,
+      ));
     });
   }
 

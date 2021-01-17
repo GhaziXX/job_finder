@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:job_finder/models/compay.dart';
+import 'package:job_finder/views/job_details.dart';
 
 import 'package:job_finder/widgets/recent_job_card.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
@@ -59,6 +60,17 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
                       itemBuilder: (context, index) {
                         var recent = snapshot.data[index];
                         return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => JobDetail(
+                                  company: recent,
+                                  isBook: true,
+                                ),
+                              ),
+                            );
+                          },
                           child: RecentJobCard(
                             company: recent,
                             isBook: true,

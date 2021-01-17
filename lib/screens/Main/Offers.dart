@@ -217,6 +217,10 @@ class _OffersState extends State<Offers> {
                                                                             JobDetail(
                                                                       company:
                                                                           recent,
+                                                                      isBook: books
+                                                                              .contains(recent.id)
+                                                                          ? true
+                                                                          : false,
                                                                     ),
                                                                   ),
                                                                 );
@@ -373,6 +377,10 @@ class _OffersState extends State<Offers> {
                                                     builder: (context) =>
                                                         JobDetail(
                                                       company: recent,
+                                                      isBook: books.contains(
+                                                              recent.id)
+                                                          ? true
+                                                          : false,
                                                     ),
                                                   ),
                                                 );
@@ -424,13 +432,17 @@ class _OffersState extends State<Offers> {
                                   MaterialPageRoute(
                                     builder: (context) => JobDetail(
                                       company: company,
+                                      isBook: books.contains(company.id)
+                                          ? true
+                                          : false,
                                     ),
                                   ),
                                 );
                               },
                               child: CompanyCard(
                                 company: company,
-                                isBook : books.contains(company.id) ? true : false,
+                                isBook:
+                                    books.contains(company.id) ? true : false,
                               ),
                             );
                           },
@@ -528,6 +540,9 @@ class _OffersState extends State<Offers> {
                                 MaterialPageRoute(
                                   builder: (context) => JobDetail(
                                     company: recent,
+                                    isBook: books.contains(recent.id)
+                                        ? true
+                                        : false,
                                   ),
                                 ),
                               );

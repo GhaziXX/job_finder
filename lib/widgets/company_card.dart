@@ -4,6 +4,7 @@ import 'package:job_finder/config/FontsConstants.dart';
 import 'package:job_finder/models/compay.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
+// ignore: must_be_immutable
 class CompanyCard extends StatelessWidget {
   final Company company;
   bool isBook = false;
