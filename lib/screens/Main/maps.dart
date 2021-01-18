@@ -154,7 +154,6 @@ class _LocationViewState extends State<LocationView> {
     await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
       int l = snapshot.docs.length;
-
       for (var i = 0; i < l; i++) {
         if (d[i].data()['uid'] == uid) {
           updateData(f, d[i].id, GeoPoint(pos.latitude, pos.longitude));
@@ -211,19 +210,6 @@ class _LocationViewState extends State<LocationView> {
         });
       },
       transition: CircularFloatingSearchBarTransition(),
-      // leadingActions: [
-      //   FloatingSearchBarAction(
-      //     showIfOpened: false,
-      //     child: CircularButton(
-      //       icon: const Icon(Icons.arrow_back),
-      //       onPressed: () {
-      //         Navigator.pop(context);
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (context) => SettingsOnePage()));
-      //       },
-      //     ),
-      //   ),
-      // ],
       actions: [
         FloatingSearchBarAction(
           showIfOpened: false,

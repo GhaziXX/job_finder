@@ -73,30 +73,33 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
     _tags = [];
     await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
-      d.forEach((element) {
-        Map<String, dynamic> da = element.data();
+      for (int i = 0; i < d.length; i++) {
+        Map<String, dynamic> da = d[i].data();
         if (da['uid'] == uid) {
           da['tags'].forEach((element) {
             _tags.add(element);
           });
+          break;
         }
-      });
+      }
     });
   }
 
   void getName(CollectionReference f, String uid) async {
     await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
-      d.forEach((element) {
-        Map<String, dynamic> da = element.data();
+      for (int i = 0; i < d.length; i++) {
+        Map<String, dynamic> da = d[i].data();
         if (da['uid'] == uid) {
           setState(() {
             name = da['name'].toString();
           });
+          break;
         }
-      });
+      }
     });
   }
+
   Future<void> _deleteCacheDir() async {
     final cacheDir = await getTemporaryDirectory();
 
@@ -104,6 +107,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
       cacheDir.deleteSync(recursive: true);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final litUser = context.getSignedInUser();

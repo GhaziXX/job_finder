@@ -135,14 +135,15 @@ class CompanyCard extends StatelessWidget {
     List<String> temp = new List();
     await f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
-      d.forEach((element) {
-        Map<String, dynamic> da = element.data();
+      for (int i = 0; i < d.length; i++) {
+        Map<String, dynamic> da = d[i].data();
         if (da['uid'] == uid) {
           da['bookmarked'].forEach((element) {
             temp.add(element);
           });
+          break;
         }
-      });
+      }
       identifier = temp;
     });
   }
