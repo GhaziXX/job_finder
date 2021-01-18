@@ -24,6 +24,7 @@ Future<List<Company>> futureTaggedOffer;
 Future<List<Company>> futureRecentOffer;
 
 class _OffersState extends State<Offers> {
+  RangeValues _currentRangeValues = const RangeValues(40, 80);
   static String name = "";
   static String stags = "";
   static String oneTimeTags = "";
@@ -35,7 +36,12 @@ class _OffersState extends State<Offers> {
   final List filterList = List();
   bool pressAttention = false;
   var items = List<String>();
-  bool checked = false;
+  bool checkedFull = false;
+  bool checkedR = false;
+  bool checkedInt = false;
+  bool updated = false;
+
+
   static List<String> books = new List<String>();
   final databaseReference = FirebaseFirestore.instance.collection("users_data");
   String uid = "";
@@ -191,7 +197,7 @@ class _OffersState extends State<Offers> {
                                         future: fetchOfferSearch(
                                             tag: myText.text,
                                             location: myLocation.text,
-                                            fullTime: checked.toString()),
+                                            fullTime: checkedFull.toString()),
                                         builder: (context, snapshot) {
                                           if (snapshot.hasData) {
                                             return StatefulBuilder(builder:
@@ -291,70 +297,113 @@ class _OffersState extends State<Offers> {
                       child: FlatButton(
                         //filter
                         onPressed: () {
-                          showDialog(
+                          showMaterialModalBottomSheet(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.only(
+                                    topLeft: const Radius.circular(25.0),
+                                    topRight: const Radius.circular(25.0)),
+                              ),
                               context: context,
                               builder: (BuildContext context) {
-                                return new AlertDialog(
-                                  title: Center(
-                                      child: const Text('Filters',
-                                          style: TextStyle(
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.bold))),
-                                  content: new Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20.0),
-                                        child: TextField(
-                                          controller:
-                                              myLocation, //to get the info in myText : myText.text
-                                          cursorColor: Colors.black,
-                                          decoration: InputDecoration(
-                                            icon: Icon(
-                                              Icons.home,
-                                              size: 25.0,
-                                              color: Colors.black,
-                                            ),
-                                            border: InputBorder.none,
-                                            hintText: "Location",
-                                            hintStyle: kSubtitleStyle.copyWith(
-                                              color: Palette.navyBlue,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          //SizedBox(width: 15),
-                                          Checkbox(
-                                            value: checked,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                checked = value;
-                                              });
-                                            },
-                                            activeColor: Colors.blueAccent,
-                                          ),
-                                          SizedBox(width: 10),
-                                          Text('Full-Time Job'),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  actions: <Widget>[
-                                    new FlatButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      textColor: Theme.of(context).primaryColor,
-                                      child: const Text('Set'),
-                                    ),
-                                  ],
+                                return Container(
+                                  height:400.0,
+                                  child : StatefulBuilder(
+                                      builder: (BuildContext context, StateSetter setState)
+                                      { return Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                SizedBox(height: 20.0),
+                                                Text("Salary Range",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15.0,),),
+                                                RangeSlider(
+                                                  values: _currentRangeValues,
+                                                  min: 0,
+                                                  max: 100,
+                                                  divisions: 5,
+                                                  labels: RangeLabels(
+                                                    _currentRangeValues.start.round().toString(),
+                                                    _currentRangeValues.end.round().toString(),
+                                                  ),
+                                                  onChanged: (
+                                                      RangeValues values) {
+                                                    setState(() {
+                                                      _currentRangeValues = values;
+                                                    });
+                                                  },
+                                                ),
+                                                SizedBox(height: 20.0),
+                                                Text("Job Type" ,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15.0,),),
+                                                Row(
+                                                  children: [
+                                                    Checkbox(
+                                                      value: checkedFull,
+                                                      onChanged: (bool value) {
+                                                        setState(() {
+                                                          checkedFull = value;
+                                                        });
+                                                      },
+                                                      activeColor: Colors.blueAccent,
+                                                    ),
+                                                    Text('Full-Time Job'),
+                                                    SizedBox(width: 40),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children:[
+                                                    Checkbox(
+                                                      value: checkedR,
+                                                      onChanged: (bool value) {
+                                                        setState(() {
+                                                          checkedR = value;
+                                                        });
+                                                      },
+                                                      activeColor: Colors.blueAccent,
+                                                    ),
+                                                    Text('Remote'),
+                                                    SizedBox(width: 40),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Checkbox(
+                                                      value: checkedInt,
+                                                      onChanged: (bool value) {
+                                                        setState(() {
+                                                          checkedInt = value;
+                                                        });
+                                                      },
+                                                      activeColor: Colors.blueAccent,
+                                                    ),
+                                                    Text('Internship'),
+                                                    SizedBox(width: 40),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 20.0),
+                                                SwitchListTile(
+                                                  activeColor: Palette.navyBlue,
+                                                  contentPadding: const EdgeInsets.all(0),
+                                                  title: Text("use my location"),
+                                                  value: updated,
+                                                  onChanged: (bool newValue) {
+                                                    setState(() {
+                                                      updated = newValue;
+                                                      //  saveSwitchState2(newValue);
+                                                    });
+                                                  },
+                                                ),
+                                              ]),
+                                        );
+                                      }),
                                 );
-                              });
+                              }
+                          );
                         },
                         child: Icon(
                           FontAwesomeIcons.slidersH,
