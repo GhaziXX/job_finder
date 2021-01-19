@@ -33,8 +33,9 @@ class _OffersState extends State<Offers> {
   static String nameFromShared;
   static String lat;
   static String lng;
+  String myLat = "";
+  String myLong = "";
   TextEditingController myText; //Search text input
-  TextEditingController myLocation;
   //Location description
   TextEditingController myDescription;
   final List filterList = List();
@@ -73,7 +74,6 @@ class _OffersState extends State<Offers> {
     //futureTaggedOffer = fetchOfferTagged(tag: oneTimeTags);
     futureRecentOffer = fetchOfferRecent();
     myText = TextEditingController();
-    myLocation = TextEditingController();
     myDescription = TextEditingController(); //description
   }
 
@@ -216,9 +216,6 @@ class _OffersState extends State<Offers> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
                 Padding(
                   padding: EdgeInsets.only(right: 32, top: 60, bottom: 3),
                   child: Text(
@@ -226,17 +223,6 @@ class _OffersState extends State<Offers> {
                     style: kPageTitleStyle,
                   ),
                 ),
-                // IconButton(
-                //     icon: Icon(Icons.refresh),
-                //     color: Palette.navyBlue,
-                //     onPressed: () {
-                //       _deleteCacheDir();
-                //       setState(() {
-                //         Navigator.push(context, BottomNav.route);
-                //       });
-                //     })
-                //],
-                //),
                 SizedBox(height: 25.0),
                 Container(
                   width: double.infinity,
@@ -269,7 +255,8 @@ class _OffersState extends State<Offers> {
                                       return FutureBuilder<List<Company>>(
                                           future: fetchOfferSearch(
                                               tag: myText.text,
-                                              location: myLocation.text,
+                                              long: myLong,
+                                              lat: myLat,
                                               fullTime: checkedFull.toString()),
                                           builder: (context, snapshot) {
                                             if (snapshot.hasData) {
@@ -346,7 +333,9 @@ class _OffersState extends State<Offers> {
                                                 );
                                               });
                                             } else if (snapshot.hasError) {
-                                              return Text("${snapshot.error}");
+                                              return Center(
+                                                  child: Text(
+                                                      "No Available Data"));
                                             }
                                             return Center(
                                                 child: SizedBox(
@@ -486,6 +475,8 @@ class _OffersState extends State<Offers> {
                                                 onChanged: (bool newValue) {
                                                   setState(() {
                                                     updated = newValue;
+                                                    myLong = lng;
+                                                    myLat = lat;
                                                     //  saveSwitchState2(newValue);
                                                   });
                                                 },
@@ -560,7 +551,9 @@ class _OffersState extends State<Offers> {
                                             });
                                       });
                                     } else if (snapshot.hasError) {
-                                      return Text("${snapshot.error}");
+                                      return Center(
+                                          child: Text("No Available Data"));
+                                      ;
                                     }
                                     return Center(
                                         child: SizedBox(
@@ -582,6 +575,9 @@ class _OffersState extends State<Offers> {
                   child: FutureBuilder<List<Company>>(
                       future: futureTaggedOffer,
                       builder: (context, snapshot) {
+                        ErrorWidget.builder = (FlutterErrorDetails details) {
+                          return Container(color: Colors.grey[100]);
+                        };
                         if (snapshot.hasData) {
                           return ListView.builder(
                             itemCount: 5,
@@ -613,7 +609,7 @@ class _OffersState extends State<Offers> {
                             },
                           );
                         } else if (snapshot.hasError) {
-                          return Text("${snapshot.error}");
+                          return Center(child: Text("No Available Data"));
                         }
                         return Center(
                             child: SizedBox(
@@ -673,7 +669,8 @@ class _OffersState extends State<Offers> {
                                           });
                                     });
                                   } else if (snapshot.hasError) {
-                                    return Text("${snapshot.error}");
+                                    return Center(
+                                        child: Text("No Available Data"));
                                   }
                                   return Center(
                                       child: SizedBox(
@@ -721,7 +718,7 @@ class _OffersState extends State<Offers> {
                           },
                         );
                       } else if (snapshot.hasError) {
-                        return Text("${snapshot.error}");
+                        return Center(child: Text("No Available Data"));
                       }
                       return Center(
                           child: SizedBox(

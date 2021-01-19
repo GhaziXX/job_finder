@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:job_finder/models/compay.dart';
 import 'package:job_finder/views/job_details.dart';
 
@@ -79,7 +76,8 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
                       },
                     );
                   } else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
+                    return Center(child: Text("No Available"));
+                    ;
                   }
                   return Center(
                     child: Column(
@@ -103,7 +101,6 @@ class _BookmarkedPageState extends State<BookmarkedPage> {
   }
 
   Future getAllBooks() async {
-    //print(books.length);
     await getBooks();
     return fetchOfferById(ids: books);
   }

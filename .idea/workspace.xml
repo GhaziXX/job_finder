@@ -13,17 +13,20 @@
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/models/compay.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/compay.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/Main/Offers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/Offers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/Main/bookmarked.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/bookmarked.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/Main/bottom_nav.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/bottom_nav.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/Main/settings_new.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/settings_new.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/Main/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Main/splash_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DEQKNRAU7SIJZPPZ]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -110,11 +113,11 @@
     <state width="1236" height="2" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1609767530934" />
     <state width="1236" height="2" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610375708425" />
     <state width="1323" height="169" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1610918953838" />
-    <state x="152" y="0" key="SettingsEditor" timestamp="1610915084608">
+    <state x="152" y="0" key="SettingsEditor" timestamp="1611060647785">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1607454951535" />
-    <state x="152" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1610915084608" />
+    <state x="152" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1611060647785" />
     <state x="123" y="97" width="1035" height="645" key="dock-window-1" timestamp="1610370154381">
       <screen x="0" y="0" width="1280" height="689" />
     </state>

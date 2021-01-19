@@ -7,7 +7,6 @@ import 'package:job_finder/screens/Main/bookmarked.dart';
 import 'package:job_finder/screens/Main/settings_new.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
-
 class BottomNav extends StatefulWidget {
   const BottomNav({Key key}) : super(key: key);
   static MaterialPageRoute get route => MaterialPageRoute(
@@ -66,10 +65,6 @@ class _BottomNavState extends State<BottomNav> {
         ));
   }
 
-  // void createRecord(CollectionReference f, String name, String uid) async {
-  //   await f.add({'name': name, "uid": uid});
-  // }
-
   void getData(CollectionReference f, String uid, String name) {
     f.get().then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> d = snapshot.docs;
@@ -80,16 +75,6 @@ class _BottomNavState extends State<BottomNav> {
           break;
         }
       }
-      // bool exists = false;
-      // for (var i = 0; i < l; i++) {
-      //   if (d[i].data()["uid"].toString() == uid) {
-      //     exists = true;
-      //     break;
-      //   }
-      // }
-      // if (!exists && name != null) {
-      //   createRecord(f, name, uid);
-      // }
     });
   }
 

@@ -3,18 +3,23 @@ import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-Future<List<Company>> fetchOfferTagged({String tag = '', String lat = '', String long ='', String fullTime = '', int page = 0}) async {
+Future<List<Company>> fetchOfferTagged(
+    {String tag = '',
+    String lat = '',
+    String long = '',
+    String fullTime = '',
+    int page = 0}) async {
   Map<String, String> headers = {
     'Content-Type': 'application/json;charset=UTF-8',
     'Charset': 'utf-8'
   };
   String fileName = "CachePopularData.json";
   var cacheDir = await getTemporaryDirectory();
-  if(!await File(cacheDir.path + "/" + fileName).exists() ) {
+  if (!await File(cacheDir.path + "/" + fileName).exists()) {
     var response = await get(
-        'https://jobs.github.com/positions.json?description=$tag&lat=$lat&long=$long&full_time=$fullTime&page=$page', headers:headers);
+        'https://jobs.github.com/positions.json?description=$tag&lat=$lat&long=$long&full_time=$fullTime&page=$page',
+        headers: headers);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
@@ -22,37 +27,42 @@ Future<List<Company>> fetchOfferTagged({String tag = '', String lat = '', String
       File file = new File(tempDir.path + "/" + fileName);
       List jsonResponse = jsonDecode(response.body);
       print(jsonResponse);
-      file.writeAsString(response.body , flush: true, mode: FileMode.write);
+      file.writeAsString(response.body, flush: true, mode: FileMode.write);
       return jsonResponse.map((offer) => new Company.fromJson(offer)).toList();
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load data');
     }
-  }
-  else if (await File(cacheDir.path + "/" + fileName).exists() ) {
+  } else if (await File(cacheDir.path + "/" + fileName).exists()) {
     //TOD0: Reading from the json File
     var jsonData = File(cacheDir.path + "/" + fileName).readAsStringSync();
     List response = json.decode(jsonData);
     return response.map((offer) => new Company.fromJson(offer)).toList();
   }
 }
-Future<List<Company>> fetchOfferRecent({String tag = '', String lat = '', String long ='', String fullTime = '', int page = 0}) async {
+
+Future<List<Company>> fetchOfferRecent(
+    {String tag = '',
+    String lat = '',
+    String long = '',
+    String fullTime = '',
+    int page = 0}) async {
   Map<String, String> headers = {
     'Content-Type': 'application/json;charset=UTF-8',
     'Charset': 'utf-8'
   };
   String fileName = "CacheRecentData.json";
   var cacheDir = await getTemporaryDirectory();
-  if (await File(cacheDir.path + "/" + fileName).exists() ) {
+  if (await File(cacheDir.path + "/" + fileName).exists()) {
     //TOD0: Reading from the json File
     var jsonData = File(cacheDir.path + "/" + fileName).readAsStringSync();
     List response = json.decode(jsonData);
     return response.map((offer) => new Company.fromJson(offer)).toList();
-  }
-  else {
+  } else {
     var response = await get(
-        'https://jobs.github.com/positions.json?description=$tag&lat=$lat&long=$long&full_time=$fullTime&page=$page', headers:headers);
+        'https://jobs.github.com/positions.json?description=$tag&lat=$lat&long=$long&full_time=$fullTime&page=$page',
+        headers: headers);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
@@ -60,7 +70,7 @@ Future<List<Company>> fetchOfferRecent({String tag = '', String lat = '', String
       File file = new File(tempDir.path + "/" + fileName);
       List jsonResponse = jsonDecode(response.body);
       print(jsonResponse);
-      file.writeAsString(response.body , flush: true, mode: FileMode.write);
+      file.writeAsString(response.body, flush: true, mode: FileMode.write);
       return jsonResponse.map((offer) => new Company.fromJson(offer)).toList();
     } else {
       // If the server did not return a 200 OK response,
@@ -69,9 +79,15 @@ Future<List<Company>> fetchOfferRecent({String tag = '', String lat = '', String
     }
   }
 }
-Future<List<Company>> fetchOfferSearch({String tag = '', String location = '', String fullTime = '', int page = 0}) async {
+
+Future<List<Company>> fetchOfferSearch(
+    {String tag = '',
+    String long = '',
+    lat = '',
+    String fullTime = '',
+    int page = 0}) async {
   var response = await get(
-      'https://jobs.github.com/positions.json?description=$tag&location=$location&full_time=$fullTime&page=$page');
+      'https://jobs.github.com/positions.json?description=$tag&long=$long,&lat=$lat&full_time=$fullTime&page=$page');
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
@@ -83,12 +99,13 @@ Future<List<Company>> fetchOfferSearch({String tag = '', String location = '', S
     throw Exception('Failed to load data');
   }
 }
+
 Future fetchOfferById({List<String> ids}) async {
   List<Company> b = new List();
 
   for (int i = 0; i < ids.length; i++) {
     var response =
-    await get('https://jobs.github.com/positions/${ids[i]}.json');
+        await get('https://jobs.github.com/positions/${ids[i]}.json');
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.

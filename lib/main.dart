@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:job_finder/config/Palette.dart';
 import 'package:job_finder/models/splash.dart';
@@ -14,7 +11,6 @@ import 'package:job_finder/screens/auth/auth.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:path_provider/path_provider.dart';
 
 
 void main() {
@@ -58,7 +54,7 @@ class MyApp extends StatelessWidget {
                         emailAndPassword: true, // enabled by default
                         google: true),
                     child: MaterialApp(
-                        title: 'Jobby',
+                        title: 'Job Finder',
                         debugShowCheckedModeBanner: false,
                         theme: ThemeData(
                           visualDensity: VisualDensity.adaptivePlatformDensity,
