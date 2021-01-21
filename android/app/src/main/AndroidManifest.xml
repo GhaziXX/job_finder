@@ -11,8 +11,8 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="job_finder"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Job Finder"
+        android:icon="@mipmap/launcher_icon">
         <meta-data
               android:name="com.google.android.geo.API_KEY"
               android:value="AIzaSyBSr3VsidZZQ6Xfmc3wzuksww251ryDJpU"

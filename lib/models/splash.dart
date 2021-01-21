@@ -25,13 +25,23 @@ class SplashModel extends ChangeNotifier {
   }
 
   void swapColors() {
-    if (_isToggled) {
+    if (index == 0) {
       _backGroundColor = Palette.navyBlue;
       _foreGroundColor = Palette.darkCornflowerBlue;
-    } else {
+    } else if (index == 1) {
       _backGroundColor = Palette.darkCornflowerBlue;
       _foreGroundColor = Palette.navyBlue;
+    } else {
+      _backGroundColor = Palette.navyBlue;
+      _foreGroundColor = Palette.darkCornflowerBlue;
     }
+    // if (_isToggled) {
+    //   _backGroundColor = Palette.navyBlue;
+    //   _foreGroundColor = Palette.darkCornflowerBlue;
+    // } else {
+    //   _backGroundColor = Palette.darkCornflowerBlue;
+    //   _foreGroundColor = Palette.navyBlue;
+    // }
     notifyListeners();
   }
 

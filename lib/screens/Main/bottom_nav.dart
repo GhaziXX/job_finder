@@ -75,7 +75,21 @@ class _BottomNavState extends State<BottomNav> {
           break;
         }
       }
+      bool exists = false;
+      for (var i = 0; i < l; i++) {
+        if (d[i].data()["uid"].toString() == uid) {
+          exists = true;
+          break;
+        }
+      }
+      if (!exists && name != null) {
+        createRecord(f, name, uid);
+      }
     });
+  }
+
+  void createRecord(CollectionReference f, String name, String uid) async {
+    await f.add({'name': name, "uid": uid, 'bookmarked': [], 'tags': []});
   }
 
   void updateData(CollectionReference f, String id, String uid) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tags/flutter_tags.dart';
 import 'package:job_finder/config/Palette.dart';
+import 'package:job_finder/screens/auth/auth.dart';
 import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:job_finder/screens/Main/maps.dart';
@@ -242,6 +243,11 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                     onTap: () {
                       _deleteCacheDir();
                       context.signOut();
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => AuthScreen()),
+                          (route) => false);
                     },
                     trailing: Icon(
                       Icons.logout,

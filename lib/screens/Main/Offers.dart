@@ -57,7 +57,7 @@ class _OffersState extends State<Offers> {
     // monitor network fetch
     _deleteCacheDir();
     setState(() {
-      Navigator.push(context, BottomNav.route);
+      Navigator.pushReplacement(context, BottomNav.route);
     });
     _refreshController.refreshCompleted();
     //await Future.delayed(Duration(milliseconds: 1000));

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:job_finder/screens/auth/utils/decoration_functions.dart';
 import 'package:job_finder/screens/auth/utils/provider_button.dart';
@@ -34,7 +33,7 @@ class SignIn extends StatelessWidget {
             Expanded(
               flex: 18,
               child: ListView(
-                physics : NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),
